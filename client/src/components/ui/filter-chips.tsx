@@ -17,7 +17,6 @@ interface FilterChipsProps {
   className?: string;
   urlSync?: {
     paramName: string;
-    updateUrl: (params: URLSearchParams) => void;
   };
 }
 
@@ -44,16 +43,27 @@ export function FilterChips({
     }
   }, [urlSync, onValueChange]);
 
+  // Sync with external value changes
+  useEffect(() => {
+    setSelectedIds(value);
+  }, [value]);
+
   // Update URL when selection changes
   useEffect(() => {
-    if (urlSync && selectedIds.length > 0) {
+    if (urlSync) {
       const urlParams = new URLSearchParams(window.location.search);
-      urlParams.set(urlSync.paramName, selectedIds.join(','));
-      urlSync.updateUrl(urlParams);
-    } else if (urlSync && selectedIds.length === 0) {
-      const urlParams = new URLSearchParams(window.location.search);
-      urlParams.delete(urlSync.paramName);
-      urlSync.updateUrl(urlParams);
+      if (selectedIds.length > 0) {
+        urlParams.set(urlSync.paramName, selectedIds.join(','));
+      } else {
+        urlParams.delete(urlSync.paramName);
+      }
+      
+      // Prevent trailing "?" when no params
+      const newUrl = urlParams.toString() 
+        ? `${window.location.pathname}?${urlParams.toString()}`
+        : window.location.pathname;
+      
+      window.history.replaceState({}, '', newUrl);
     }
   }, [selectedIds, urlSync]);
 
@@ -142,15 +152,7 @@ export function FilterChips({
   );
 }
 
-// Helper hook for URL synchronization
+// Helper hook for URL synchronization  
 export function useFilterUrl(paramName: string) {
-  const updateUrl = useCallback((params: URLSearchParams) => {
-    const newUrl = `${window.location.pathname}?${params.toString()}`;
-    window.history.replaceState({}, '', newUrl);
-  }, []);
-
-  return {
-    paramName,
-    updateUrl
-  };
+  return { paramName };
 }
