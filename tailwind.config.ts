@@ -5,13 +5,9 @@ export default {
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
       colors: {
         background: "hsl(var(--background))",
+        surface: "hsl(var(--surface))",
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",
@@ -37,6 +33,8 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        success: "hsl(var(--success))",
+        warning: "hsl(var(--warning))",
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
@@ -52,9 +50,37 @@ export default {
           "5": "hsl(var(--chart-5))",
         },
       },
+      fontSize: {
+        'display': 'var(--font-display)',
+        'h1': 'var(--font-h1)',
+        'h2': 'var(--font-h2)', 
+        'body': 'var(--font-body)',
+      },
       fontFamily: {
-        sans: ["var(--font-sans)"],
-        mono: ["var(--font-mono)"],
+        display: ["var(--font-family-display)"],
+        sans: ["var(--font-family-sans)"],
+        mono: ["var(--font-family-mono)"],
+      },
+      borderRadius: {
+        'card': 'var(--r-card)',
+        'chip': 'var(--r-chip)',
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
+      boxShadow: {
+        'card': 'var(--sh-card)',
+        'hover': 'var(--sh-hover)',
+      },
+      spacing: {
+        'section': 'var(--space-section)',
+      },
+      transitionDuration: {
+        'fast': 'var(--dur-fast)',
+        'med': 'var(--dur-med)',
+      },
+      transitionTimingFunction: {
+        'smooth': 'var(--easing)',
       },
       keyframes: {
         "accordion-down": {
