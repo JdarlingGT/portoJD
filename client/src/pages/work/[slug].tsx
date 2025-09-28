@@ -5,10 +5,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { Link } from "wouter";
-import { getCaseStudy } from "@/data/case-studies";
+import { getCaseStudy, caseStudies } from "@/data/case-studies";
 import { MetricCard } from "@/components/ui/metric-card";
+import { StatBar } from "@/components/ui/stat-bar";
+import { TableOfContents } from "@/components/ui/table-of-contents";
+import { EvidenceGallery } from "@/components/ui/evidence-gallery";
+import { BeforeAfterSlider } from "@/components/ui/before-after-slider";
+import { RelatedWorkRail } from "@/components/ui/related-work-rail";
 import { analytics } from "@/lib/analytics";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 export default function CaseStudy() {
   const [match, params] = useRoute("/work/:slug");
@@ -18,6 +23,46 @@ export default function CaseStudy() {
     if (caseStudy) {
       analytics.trackCaseStudyOpen(caseStudy.slug);
     }
+  }, [caseStudy]);
+
+  // Generate table of contents
+  const tocItems = useMemo(() => {
+    if (!caseStudy) return [];
+    
+    const items = [
+      { id: "challenge", title: "The Challenge", level: 2 },
+      { id: "approach", title: "The Approach", level: 2 },
+      { id: "impact", title: "The Impact", level: 2 },
+    ];
+    
+    if (caseStudy.artifacts.length > 0) {
+      items.push({ id: "evidence", title: "Evidence", level: 2 });
+    }
+    
+    items.push(
+      { id: "tech-stack", title: "Technology Stack", level: 2 },
+      { id: "learnings", title: "Key Learnings", level: 2 }
+    );
+    
+    return items;
+  }, [caseStudy]);
+
+  // Get related case studies
+  const relatedCaseStudies = useMemo(() => {
+    if (!caseStudy) return [];
+    
+    // First try to get case studies with shared tags
+    let related = caseStudies.filter(study => 
+      study.slug !== caseStudy.slug && 
+      study.tags.some(tag => caseStudy.tags.includes(tag))
+    );
+    
+    // If no shared tags, get other case studies  
+    if (related.length === 0) {
+      related = caseStudies.filter(study => study.slug !== caseStudy.slug);
+    }
+    
+    return related.slice(0, 3);
   }, [caseStudy]);
 
   if (!caseStudy) {
@@ -65,15 +110,15 @@ export default function CaseStudy() {
 
             {/* Header */}
             <header className="mb-12">
-              <div className="flex items-center mb-4">
+              <div className="flex items-center mb-6">
                 <div className="text-4xl mr-4" data-testid={`case-study-emoji-${caseStudy.slug}`}>
                   {caseStudy.emoji}
                 </div>
                 <div>
-                  <h1 className="text-4xl md:text-5xl font-bold" data-testid={`case-study-title-${caseStudy.slug}`}>
+                  <h1 className="text-display font-bold mb-2" data-testid={`case-study-title-${caseStudy.slug}`}>
                     {caseStudy.title}
                   </h1>
-                  <div className="flex flex-wrap gap-2 mt-3">
+                  <div className="flex flex-wrap gap-2 mb-3">
                     <Badge variant="outline" data-testid={`case-study-role-${caseStudy.slug}`}>
                       {caseStudy.role}
                     </Badge>
@@ -84,23 +129,14 @@ export default function CaseStudy() {
                       {caseStudy.context}
                     </Badge>
                   </div>
+                  <p className="text-body-lg text-muted-foreground max-w-2xl">
+                    {caseStudy.problem.split('.')[0]}.
+                  </p>
                 </div>
               </div>
 
-              {/* Key Metrics */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                {caseStudy.results.slice(0, 4).map((result, index) => (
-                  <MetricCard
-                    key={index}
-                    value={result.delta || result.value}
-                    label={result.metric}
-                    data-testid={`case-study-metric-${index}`}
-                  />
-                ))}
-              </div>
-
               {/* Tags */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-8">
                 {caseStudy.tags.map(tag => (
                   <Badge 
                     key={tag} 
@@ -111,13 +147,29 @@ export default function CaseStudy() {
                   </Badge>
                 ))}
               </div>
+
+              {/* StatBar with Key Outcomes */}
+              <StatBar
+                title="Key Outcomes Delivered"
+                description="Measurable impact achieved through strategic system architecture and marketing automation."
+                items={caseStudy.results.map(result => ({
+                  label: result.metric,
+                  value: result.value,
+                  delta: result.delta,
+                  baseline: result.baseline,
+                  trend: result.delta?.includes('+') ? 'up' : 'neutral'
+                }))}
+              />
             </header>
 
+            {/* Table of Contents - Sticky */}
+            <TableOfContents items={tocItems} />
+
             {/* Content */}
-            <div className="prose prose-lg max-w-none space-y-8">
+            <div className="prose prose-lg max-w-none space-y-12">
               {/* Problem */}
               <section>
-                <h2 className="text-2xl font-bold mb-4" data-testid="case-study-problem-heading">The Challenge</h2>
+                <h2 id="challenge" className="text-h2 font-bold mb-6" data-testid="case-study-problem-heading">The Challenge</h2>
                 <p className="text-muted-foreground" data-testid="case-study-problem-content">
                   {caseStudy.problem}
                 </p>
@@ -138,7 +190,7 @@ export default function CaseStudy() {
 
               {/* Approach */}
               <section>
-                <h2 className="text-2xl font-bold mb-4" data-testid="case-study-approach-heading">The Approach</h2>
+                <h2 id="approach" className="text-h2 font-bold mb-6" data-testid="case-study-approach-heading">The Approach</h2>
                 <p className="text-muted-foreground" data-testid="case-study-approach-content">
                   {caseStudy.approach}
                 </p>
@@ -146,7 +198,7 @@ export default function CaseStudy() {
 
               {/* Results */}
               <section>
-                <h2 className="text-2xl font-bold mb-4" data-testid="case-study-results-heading">The Impact</h2>
+                <h2 id="impact" className="text-h2 font-bold mb-6" data-testid="case-study-results-heading">The Impact</h2>
                 <div className="grid md:grid-cols-2 gap-6">
                   {caseStudy.results.map((result, index) => (
                     <div 
@@ -170,9 +222,45 @@ export default function CaseStudy() {
                 </div>
               </section>
 
+              {/* Evidence Gallery */}
+              {caseStudy.artifacts.length > 0 && (
+                <section>
+                  <h2 id="evidence" className="text-h2 font-bold mb-6">Evidence & Artifacts</h2>
+                  <EvidenceGallery
+                    items={caseStudy.artifacts.map((artifact, index) => ({
+                      id: `artifact-${index}`,
+                      src: artifact.src,
+                      alt: artifact.alt,
+                      caption: artifact.caption,
+                      type: artifact.type === 'document' ? 'image' : artifact.type as any
+                    }))}
+                    columns={3}
+                  />
+                </section>
+              )}
+
+              {/* Before/After Slider - Sample for demonstration */}
+              {caseStudy.slug === 'the-launchpad' && (
+                <section className="mb-12">
+                  <h2 className="text-h2 font-bold mb-6">Transformation</h2>
+                  <BeforeAfterSlider
+                    beforeImage={{
+                      src: "/case-studies/launchpad-before.png",
+                      alt: "Before: Static directory interface",
+                      caption: "Original static directory with limited functionality"
+                    }}
+                    afterImage={{
+                      src: "/case-studies/launchpad-after.png", 
+                      alt: "After: Dynamic automated system",
+                      caption: "New automated lead generation system with smart workflows"
+                    }}
+                  />
+                </section>
+              )}
+
               {/* Tech Stack */}
               <section>
-                <h2 className="text-2xl font-bold mb-4" data-testid="case-study-stack-heading">Technology Stack</h2>
+                <h2 id="tech-stack" className="text-h2 font-bold mb-6" data-testid="case-study-stack-heading">Technology Stack</h2>
                 <div className="flex flex-wrap gap-2">
                   {caseStudy.stack.map(tech => (
                     <Badge 
@@ -189,7 +277,7 @@ export default function CaseStudy() {
               {/* Learnings */}
               {caseStudy.learnings.length > 0 && (
                 <section>
-                  <h2 className="text-2xl font-bold mb-4" data-testid="case-study-learnings-heading">Key Learnings</h2>
+                  <h2 id="learnings" className="text-h2 font-bold mb-6" data-testid="case-study-learnings-heading">Key Learnings</h2>
                   <ul className="space-y-3">
                     {caseStudy.learnings.map((learning, index) => (
                       <li 
@@ -206,8 +294,18 @@ export default function CaseStudy() {
               )}
             </div>
 
+            {/* Related Work Rail */}
+            <div className="mt-16 mb-12" data-testid="related-work-rail">
+              <RelatedWorkRail 
+                relatedCaseStudies={relatedCaseStudies}
+                currentSlug={caseStudy.slug}
+                title="Related Case Studies"
+                description="Explore other projects with similar challenges and outcomes."
+              />
+            </div>
+
             {/* CTA */}
-            <div className="bg-card border border-border rounded-xl p-8 mt-12 text-center">
+            <div className="bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 border border-primary/20 rounded-xl p-8 mt-16 text-center shadow-md">
               <h3 className="text-2xl font-bold mb-4" data-testid="case-study-cta-heading">
                 Interested in similar results?
               </h3>
@@ -217,9 +315,11 @@ export default function CaseStudy() {
               <Button 
                 size="lg" 
                 onClick={handleContactCTA}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
                 data-testid="button-case-study-cta"
+                asChild
               >
-                Book a 15-min portfolio walk-through
+                <a href="/contact">Book a 15-min portfolio walk-through</a>
               </Button>
             </div>
           </div>
