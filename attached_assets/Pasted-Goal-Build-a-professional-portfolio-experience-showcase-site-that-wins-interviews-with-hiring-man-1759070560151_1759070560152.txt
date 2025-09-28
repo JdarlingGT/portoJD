@@ -1,0 +1,160 @@
+Goal: Build a professional portfolio + experience showcase site that wins interviews with hiring managers and teams.
+
+You are an expert full‑stack dev + brand-focused marketer. Act like a senior product designer, copywriter, and growth engineer in one. Deliver production-grade code, conversion‑ready content, and a clean CMS workflow so I can update it without touching code.
+
+Audience
+
+* Primary: Hiring managers, team leads, and recruiters at modern software companies.
+* Secondary: IC engineers/designers who influence hiring decisions.
+
+Success Criteria
+
+* Looks senior and trustworthy in under 5 seconds (above-the-fold clarity test).
+* Clear proof of impact (metrics, shipped work, artifacts) in <30 seconds.
+* Contact/intro call scheduled or warm reply within 24–72 hours after visit.
+* Lighthouse ≥95 on Performance/Best Practices/SEO, Accessibility ≥90.
+
+Tech Stack (preferred, but use your judgment if a better choice improves DX/maintainability)
+
+* Framework: Next.js (App Router) or Astro, TypeScript, Vite/Turbopack.
+* Styling: Tailwind CSS + CSS variables for theming; dark/light mode toggle (prefers-color-scheme).
+* Content: MDX/Contentlayer or simple JSON/YAML. Absolutely no headless CMS lock-in required to launch.
+* Images: Next/Image (or Astro Image) with responsive srcset, AVIF/WebP, blur-up placeholders.
+* Forms: Serverless route handler (e.g., /api/contact) with basic spam guard (honeypot + rate limit). Deliver email via provider of your choosing; write adapter.
+* Analytics: Privacy-safe (Plausible/Umami) + basic event hooks.
+* Testing: Smoke tests for critical routes (build runs), a11y check in CI with axe (fast ruleset).
+
+Pages & IA
+
+1. Home (Hero + Credibility + Featured Work + Testimonials + CTA)
+2. Work / Case Studies (filterable by role/skill; each has problem→approach→result, visuals, metrics)
+3. Experience (timeline of roles, responsibilities, stack; badges for skills/tools)
+4. Skills (grouped by Frontend/Backend/Design/Marketing/Growth; proficiency scale; proof links)
+5. About (story, principles, working style, certifications)
+6. Testimonials (carousel + logos; pull quotes on home)
+7. Contact (short form + “book a call” link; social links; resume download)
+8. Blog/Notes (optional; MDX; RSS + /sitemap.xml)
+
+Hero Content (write for me)
+
+* Headline: "I build fast, usable products that ship—and get used."
+* Subhead: One sentence with role focus (full‑stack + growth-minded) and the outcomes I drive.
+* Primary CTA: "Request portfolio walk-through" (opens Calendly/booking link or contact form modal).
+* Secondary CTA: "View case studies" scrolls to featured work grid.
+
+Featured Work (seed structure; pull content from my uploaded files & design folder)
+
+* For each case study, generate: Title, context (company/role), problem, constraints, my actions, results (with numbers), tools/stack, 3–6 artifacts (images, GIFs, or code links), 3–5 bullet learnings.
+* Create a compact teaser card + a deep page in /work/[slug].
+
+Design & UX Requirements
+
+* Modern, breathable layout; generous whitespace; scalable typographic system (fluid clamp).
+* Components: sticky header with progress bar, breadcrumb on case studies, cards, chip filters, masonry/justified gallery for visuals, testimonial slider, accessible modal.
+* Motion: Micro‑interactions on hover/focus, tasteful entrance transitions, reduced-motion respect.
+* Accessibility: WCAG 2.2 AA; keyboard traps eliminated; focus rings; color contrast ≥ 4.5:1.
+* Theming: 2‑tone palette (light/dark) with accent brand color; implement CSS variables for easy swaps.
+
+Marketing Layer (bake into copy + structure)
+
+* Above‑the‑fold clarity (what I do, for whom, outcomes) + trust cues (logos/metrics/testimonials).
+* Proof-first case studies: before/after screenshots, dashboards, code snippets, user quotes.
+* Conversion: prominent primary CTA in hero, sticky footer CTA on mobile, exit‑intent soft prompt.
+* SEO: semantic HTML, descriptive titles/meta, canonical URLs, breadcrumbs JSON‑LD, Person + Article schema, OpenGraph/Twitter cards, hreflang if needed.
+* Lead Capture: lightweight email capture on blog and case studies ("get the full teardown").
+
+Content Ingestion & Automation
+
+* You will be provided a ZIP of documents and a folder of design work (images/PNGs/PNGs with transparency, some Figma exports). Parse these to:
+
+  * Extract quantified achievements, shipped features, and process artifacts.
+  * Auto‑draft case study pages (frontmatter + MDX body) and image galleries with alt text.
+  * Build a skills matrix from repeated themes.
+* Create data files under /content (MDX for posts/case studies, JSON/YAML for skills/experience).
+* Provide a script `yarn generate:portfolio` that (1) scans /uploads, (2) updates /content, (3) runs an image optimizer, (4) validates frontmatter.
+
+Contact & Follow‑Up
+
+* /api/contact should: validate, rate limit, email me, and log submissions to a flat file/SQLite for audit.
+* Add a hidden source field for UTM capture; persist in localStorage to prefill.
+* Optional: simple webhook dispatch for future CRM tagging.
+
+Performance & Quality Bar
+
+* Lighthouse: PWA ready (installable), Perf ≥95 on mobile, LCP < 2.5s on 4G, CLS < 0.1.
+* Bundle hygiene: code‑split routes, tree‑shake icons, lazy‑load heavy media, prefetch on hover.
+* Images: serve the correct size; use content-aware cropping if available.
+
+Deliverables
+
+* Repo with clean structure:
+  /app or /src
+  /components (ui, layout, cards, galleries, testimonial slider)
+  /content (mdx for work, posts)
+  /public (favicons, og images)
+  /scripts (generate:portfolio)
+  /styles (globals, tailwind config)
+  /uploads (processed input assets)
+* README with: how to add a new case study, how to update skills/experience, how to change theme.
+* Sample content populated from my provided files/assets; clearly marked for later edits.
+
+Nice‑to‑Haves (only if time allows after core is production‑ready)
+
+* Print‑ready one‑pager (resume + highlight reel) via /print route with print CSS.
+* Simple “Compare before/after” image slider component for redesigns.
+* Keyboard‑navigable lightbox with zoom/pan.
+
+Input Files You Will Receive (assume available at /uploads)
+
+* /uploads/docs.zip — my resume(s), project write‑ups, notes, and metrics.
+* /uploads/design/ — exported mocks, screenshots, logos, and demo GIFs.
+
+Tasks (do these now)
+
+1. Bootstrap project, scaffold routes/components, and configure Tailwind/theme tokens.
+2. Build Home, Work index, Work detail, Experience, Skills, About, Contact.
+3. Implement MDX/Contentlayer (or equivalent) + content directory.
+4. Write copy stubs from my docs; mark TODOs where you need missing details.
+5. Wire up contact form with validation, email delivery, and logging.
+6. Add analytics and basic event hooks.
+7. Optimize performance and accessibility; ship with a11y-friendly components.
+8. Populate 2–3 full example case studies and 6–9 work cards from my files.
+
+Editor Notes for You (Replit Agent)
+
+* Write clean, commented code only where non-obvious. Keep components small and testable.
+* Favor server components (Next.js) for content pages; keep client components focused.
+* Create a tiny util to format metrics (e.g., 1,200 → 1.2k) and dates.
+* Ship with a sensible default color scheme and typography (inter/space grotesk combo or system stack).
+
+What to Hand Back
+
+* Running app URL
+* Git repo
+* README with content editing steps and deployment notes (Vercel/Replit hosting ok)
+* A short checklist of remaining content I need to provide
+
+Tone & Voice (for on‑site copy you write)
+
+* Confident, concise, oriented around outcomes, with friendly energy. Avoid buzzword salad.
+* Show receipts: numbers, artifacts, and specific responsibilities.
+
+Assumptions (revise if inputs suggest better choices)
+
+* Next.js + Tailwind + MDX is acceptable
+* Resume and design assets exist and are permitted for public use
+* Basic email delivery (SMTP or provider) is acceptable for contact form
+
+Edge Cases & Safeguards
+
+* If images are huge, generate web‑ready derivatives and lazy‑load offscreen media.
+* If some projects are confidential, create redacted versions with scrubbed details and generic visuals.
+
+Acceptance Checklist (use this to QA before you mark complete)
+
+* [ ] Pages listed above exist and are responsive
+* [ ] Lighthouse/A11y scores hit targets
+* [ ] Content pipeline generates pages from /uploads
+* [ ] Contact form delivers + logs
+* [ ] SEO: sitemap, robots, JSON‑LD, OG images
+* [ ] README is clear; adding a new case study takes <5 minutes

@@ -1,0 +1,130 @@
+Purpose: Add a second pass that ingests large content (big ZIPs, long prompts, PDFs, screenshots) and auto‑produces polished, redacted, metrics‑forward case studies + skills/experience pages without manual copy‑pasting.
+
+Role: You are a senior full‑stack engineer + content ops architect. Extend the existing portfolio scaffold with a scalable ingestion pipeline.
+
+What You’ll Receive
+
+* /uploads/docs/**: large ZIPs of resumes, job histories, case write‑ups, Jira/Notion/Confluence exports, PDF decks
+* /uploads/design/**: PNG/JPG/WebP, GIFs, MP4s, Figma exports, screenshots
+* /uploads/raw/**: misc. CSV, JSON, txt logs, markdown notes, meeting notes
+* /uploads/prompt.txt: long prompt text with claims/metrics I want emphasized
+
+Core Objectives
+
+1. Parse, normalize, and version large content (docs, PDFs, images) into structured MDX/JSON.
+2. Auto‑draft case studies with Problem → Approach → Impact + artifacts + metrics.
+3. Build a skills/experience matrix with evidence links (commits, screenshots, before/after).
+4. Redact sensitive info (company names, tokens, IDs) using a ruleset + allow overrides.
+5. Produce clean, SEO‑ready pages and keep Lighthouse/A11y targets from the base prompt.
+
+Architecture
+
+* Keep Next.js/TypeScript + Tailwind from the base build.
+* Add a /scripts/ingest.ts CLI (bun or node) that runs in stages:
+  Stage A: File discovery & hashing → manifests in /content/.cache/manifests.json
+  Stage B: Text extraction (PDF/Docx/MD/HTML) → /content/.cache/text/*.json
+  Stage C: Chunking (by headings/bullets/tables) with token‑aware limits → /content/.cache/chunks/*.json
+  Stage D: Classification (resume, case write‑up, meeting notes, KPI table, code snippet) → tags added
+  Stage E: Entity & metric extraction (roles, dates, stacks, % lifts, revenue, MAUs) → normalized fields
+  Stage F: Redaction pass (company, client, PII) via regex + glossary map in /content/redactions.yml
+  Stage G: Case study synthesis → MDX in /content/work/[slug].mdx + images map
+  Stage H: Skills & experience synthesis → /content/skills.json, /content/experience.json
+  Stage I: Alt‑text generation for images + captions (respecting file names & context)
+  Stage J: OG image generation (SVG → PNG) for case studies using title/metrics
+
+Data Contracts (examples)
+
+* CaseStudyFrontmatter
+  title, role, timeframe, context, problem, constraints, actions[], results{metric, value, baseline, delta, unit}, stack[], artifacts[{src, type, caption, alt}], learnings[], confidential:boolean, redactions[]
+* ExperienceItem
+  company(redacted?), role, start, end, highlights[], stack[], impactMetrics[]
+* Skill
+  name, category (frontend/backend/design/marketing/growth), level (1–5), evidenceLinks[]
+
+Redaction
+
+* /content/redactions.yml supports mappings and masks, e.g. `Acme Corp` → `Fortune 500 SaaS`, `revenue` exact values → ranges.
+* Flag any ambiguous matches in /content/.cache/redaction-review.json for manual review.
+
+Long Prompt Emphasis
+
+* Read /uploads/prompt.txt and boost any claims/metrics it contains across:
+
+  * Hero subhead
+  * Featured Work card subtitles
+  * Case study “Impact” blocks (top of page as stat chips)
+  * Resume/Experience summary bullets
+* Keep language confident but specific; avoid meaningless superlatives.
+
+Images & Media
+
+* Auto‑generate responsive derivatives (AVIF/WebP), srcset, and blur placeholders.
+* Build a gallery manifest per case study; detect before/after pairs by filename (e.g., *before*, *after*).
+* Optional: create motion mockups from PNG sequences (if found) as lightweight MP4/WebM.
+
+Search & Discovery (optional but preferred)
+
+* Build a local vector index over /content/.cache/chunks for internal search (no third‑party calls).
+* Provide a /search route that queries the index and links to relevant sections.
+
+Testing & QA
+
+* Unit tests for parsers (docx/pdf/md) and redaction rules.
+* Golden files for a sample ZIP to ensure deterministic slugs and manifests.
+* a11y smoke on generated pages; validate all images have alt.
+
+CLI Usage
+
+* `bun run ingest` (or `node scripts/ingest.ts`) with flags:
+  --source=/uploads --maxTokens=1200 --dryRun --force --redact=on --index=on
+* Prints a summary table: docs processed, chunks created, entities found, metrics extracted, redactions applied.
+
+UI Enhancements
+
+* Case study header chips: timeframe, role, 2–4 key metrics.
+* Sticky “Evidence” drawer that lists artifacts with quick scroll links.
+* "Confidential mode" toggle that switches redacted labels and hides sensitive images.
+
+Copy Templates (use these defaults when generating MDX)
+
+* Problem: “<team/product> needed <outcome> under <constraint>.”
+* Approach: “I led <scope> and delivered <methods/tech> to <mechanism>.”
+* Impact (examples):
+
+  * “+38% sign‑ups (from 2.1% → 2.9%) in 30 days after redesign.”
+  * “Cut LCP from 4.3s to 1.8s on mobile by <techniques>.”
+  * “Reduced support tickets −27% by <feature>.”
+* CTA: “Book a 15‑min portfolio walk‑through.”
+
+SEO & Schema
+
+* Generate JSON‑LD for Person, CreativeWork, Article per case study.
+* Build /sitemap.xml and /rss.xml; canonical URLs, OpenGraph/Twitter cards.
+
+Deliverables (Add‑On)
+
+* /scripts/ingest.ts with stages defined above
+* /content/.cache/** intermediate artifacts
+* Generated MDX for 3–6 case studies; skills.json; experience.json
+* OG image templates and generated images in /public/og/*
+* README section: “How to add large content and auto‑generate pages”
+
+Acceptance Checklist (Add‑On)
+
+* [ ] Ingest handles 500+ MB across mixed file types without crashing
+* [ ] All generated case studies have at least 1 metric, 3 artifacts, alt text
+* [ ] Redaction file applied; confidential items masked
+* [ ] Search route works locally; no external calls required
+* [ ] Hero/Featured sections boosted with claims from prompt.txt
+* [ ] Lighthouse/A11y targets remain within 5 points of base
+
+Tone Note
+
+* Keep copy crisp, impact‑first. Show receipts. Minimal buzzwords. If data is missing, insert `TODO:` placeholders clearly.
+
+Run This Now
+
+1. Add this add‑on to the existing repo.
+2. Place your big ZIPs and long prompt at /uploads.
+3. `bun run ingest` (or node) → review /content/work/* and commit.
+4. Deploy. Book interviews. (Let’s make hiring managers say “finally, a grown‑up portfolio.”)

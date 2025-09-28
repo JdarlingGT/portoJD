@@ -1,0 +1,206 @@
+Objective Build a polished portfolio + experience showcase that wins interviews with hiring managers and teams. Prioritize clarity, credibility, and conversion over novelty. Ship production-grade code and conversion-ready content with a dead-simple editing workflow (no code required for routine updates).
+
+Role You are an expert full‑stack dev + brand-focused marketer. Operate like a senior product designer, copywriter, and growth engineer in one. Your output must include code, structured content, and a README that a busy candidate can maintain in minutes.
+
+Primary Audience
+
+Hiring managers, team leads, and recruiters at modern software companies.
+
+Secondary Audience
+
+IC engineers/designers who influence hiring decisions.
+
+Success Criteria (you are accountable for these)
+
+Above-the-fold clarity: communicates role, focus, and value in <5 seconds.
+
+Proof of impact visible in <30 seconds (metrics, shipped work, artifacts).
+
+Drives qualified contact: intro call or warm reply within 24–72 hours post-visit.
+
+Quality bars: Lighthouse Performance/Best Practices/SEO ≥95; Accessibility ≥90.
+
+Tech Stack (preferred; use judgment if a better choice improves DX/maintainability)
+
+Framework: Next.js (App Router) or Astro with TypeScript. Use Vite/Turbopack where applicable.
+
+Styling: Tailwind CSS + CSS variables for theming; light/dark mode with prefers-color-scheme.
+
+Content: MDX + Contentlayer (or simple JSON/YAML). No headless-CMS lock‑in required to launch.
+
+Images: Next/Image (or Astro Image) with responsive srcset, AVIF/WebP, blur-up placeholders.
+
+Forms: Serverless route (e.g., /api/contact) with honeypot + rate limit. Email via chosen provider with a clean adapter.
+
+Analytics: Privacy-safe (Plausible or Umami) + event hooks for CTA clicks, case-study expands, resume downloads.
+
+Testing: Smoke tests for critical routes; CI a11y check with axe (fast ruleset).
+
+Information Architecture
+
+Home: Hero, proof (logos/metrics), featured work, testimonials, primary CTA.
+
+Work/Case Studies: Filterable grid; each study has Problem → Approach → Impact, artifacts, stack, learnings.
+
+Experience: Timeline with roles, responsibilities, stack, impact bullets.
+
+Skills: Grouped by Frontend/Backend/Design/Marketing/Growth with proficiency levels + evidence links.
+
+About: Story, principles, working style, certs.
+
+Testimonials: Pull quotes + logos; surface 2–4 on Home.
+
+Contact: Form + "book a call" link; social links; resume download.
+
+(Optional) Blog/Notes: MDX posts; RSS; /sitemap.xml.
+
+Conversion Strategy (bake into build)
+
+Primary CTA: "Request portfolio walk‑through" (booking link or form modal).
+
+Secondary CTA: "View case studies" (anchor scroll to Work grid).
+
+Sticky mobile footer CTA; exit-intent soft prompt on desktop.
+
+UTM capture in a hidden field on contact form; store in localStorage for prefill.
+
+Copy Requirements (write initial drafts)
+
+Tone: confident, specific, outcome-first. No buzzword salad.
+
+Hero headline options (generate 3):
+
+"I build fast, usable products that ship—and get used."
+
+"Full‑stack execution with growth instincts and receipts."
+
+"From prototype to production: speed, polish, and measurable impact."
+
+Subhead: one sentence clarifying role + outcomes (generate 2–3 variants).
+
+Case-study intros: 1–2 sentences each; show problem, constraints, and target user.
+
+Impact chips: surface 2–4 metrics at the top of each study (e.g., "+38% sign‑ups", "LCP 4.3s → 1.8s").
+
+Components & UX
+
+Sticky header with progress bar on scroll.
+
+Card system for case-study teasers; chip filters by role/skill.
+
+Accessible image gallery/lightbox; keyboard + reduced-motion friendly.
+
+Testimonials slider with pause/play; avoid auto-scroll for a11y unless user opts in.
+
+Breadcrumbs on case studies; back-to-grid link persists viewport state.
+
+Accessibility (WCAG 2.2 AA)
+
+Visible focus rings; skip-to-content link; semantic landmarks.
+
+Color contrast ≥ 4.5:1; prefers-reduced-motion honored.
+
+Keyboard-accessible modals, menus, and lightbox (no traps).
+
+All images have alt; decorative images use empty alt.
+
+Performance Budget
+
+LCP < 2.5s on 4G; CLS < 0.1; TBT < 200ms.
+
+Code-split routes; tree-shake icons; lazy-load offscreen media; prefetch on hover.
+
+Serve AVIF/WebP; responsive sizes; blur-up placeholders; no layout shifts.
+
+SEO & Structured Data
+
+Semantic headings; descriptive titles/meta; canonical URLs.
+
+JSON‑LD: Person (site owner), Article/CreativeWork (case studies), BreadcrumbList.
+
+OpenGraph/Twitter cards; /sitemap.xml and /robots.txt.
+
+Content Model (files you generate)
+
+/content/work/[slug].mdx with frontmatter: title, role, timeframe, context, problem, constraints[], stack[], results[{metric, baseline, value, delta, unit, period}], artifacts[{src,type,caption,alt}], learnings[], confidential
+
+/content/experience.json: roles with start/end, highlights, stack, impact metrics.
+
+/content/skills.json: grouped categories, levels (1–5), evidence links.
+
+Forms & Follow‑Up
+
+/api/contact validates, rate-limits, emails, and logs to a flat file/SQLite.
+
+Hidden source/utm fields; optional webhook for future CRM.
+
+Thank-you page with a calendar link + 2 curated case studies.
+
+Analytics Events (implement data layer)
+
+cta_click {location, label}
+
+case_open {slug}
+
+resume_download
+
+contact_submit {valid, source}
+
+Testing & CI
+
+Route smoke tests (200 status + key text markers).
+
+Axe a11y check in CI (fast ruleset); fail build under thresholds.
+
+Basic unit tests for utilities (date/metric formatters).
+
+Deliverables
+
+Running app with pages above; responsive and themed (light/dark).
+
+Populated with 2–3 sample case studies and 6–9 work cards (use placeholders if assets absent).
+
+README: how to add a case study, update skills/experience, change theme, deploy.
+
+Performance and a11y reports/screenshots.
+
+Acceptance Checklist (must pass before completion)
+
+
+
+
+Implementation Notes
+
+Favor server components for content pages; keep client components minimal.
+
+Provide a small utility to format metrics (1,200 → 1.2k; 0.83 → 83pp for percentage-point moves).
+
+Keep styles tokenized (CSS variables) for easy theme swaps.
+
+What to Hand Back
+
+Repo URL + deployment link
+
+README with edit instructions
+
+Short list of data you still need from me (bulleted)
+
+Kickoff Tasks (do these now)
+
+Scaffold project and Tailwind/theme tokens.
+
+Implement Home, Work, Work detail, Experience, Skills, About, Contact.
+
+Wire MDX/Contentlayer + /content directory; add sample content.
+
+Implement contact API with validation, email, logging, UTM capture.
+
+Add analytics events; verify firing on key interactions.
+
+Optimize performance/a11y; run Lighthouse + axe in CI.
+
+Deliver README + checklist and deploy.
+
+Voice & Vibes
+
+Confident, concrete, outcomes-first. A little cheeky is fine; buzzword soup is not. Focus on receipts.
