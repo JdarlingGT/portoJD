@@ -40,10 +40,146 @@ export default function ContactSuccess() {
 
   const handleResumeDownload = () => {
     analytics.trackResumeDownload();
+    
+    // Create and trigger resume download
+    const resumeContent = `JACOB DARLING - Marketing Director & System Architect
+
+CONTACT:
+Email: jacob@example.com
+LinkedIn: linkedin.com/in/jacobdarling
+Portfolio: jacobdarling.dev
+
+SUMMARY:
+Marketing Director and System Architect with proven expertise in building scalable marketing systems, implementing analytics infrastructure, and driving measurable growth. Specialized in marketing automation, data integrity, and performance optimization.
+
+KEY ACHIEVEMENTS:
+• Increased qualified leads by 192% through marketing automation optimization
+• Improved attribution accuracy by 112% with multi-touchpoint tracking systems
+• Enhanced page load speed by 58% through infrastructure improvements
+• Reduced server load by 35% with performance tuning initiatives
+
+CORE COMPETENCIES:
+• Marketing Systems Architecture
+• Analytics Engineering & Data Integrity
+• Marketing Automation & Lead Generation
+• Performance Marketing & Attribution
+• DevOps & Infrastructure Security
+• Product Vision & Growth Strategy
+
+EXPERIENCE:
+
+Marketing Director & System Architect | Freelance | 2023-Present
+• Design and implement scalable marketing technology stacks
+• Build custom analytics and attribution systems
+• Optimize marketing automation workflows and lead qualification
+• Architect secure, performant infrastructure solutions
+
+Senior Marketing Engineer | Previous Role | 2021-2023
+• Led cross-functional teams in marketing technology implementation
+• Developed data-driven growth strategies and performance frameworks
+• Implemented marketing automation systems driving 300%+ lead growth
+• Built analytics infrastructure for multi-million dollar campaigns
+
+EDUCATION:
+Bachelor's in Marketing Technology
+Certifications: Google Analytics, HubSpot Marketing Software, AWS Solutions Architect
+
+TECHNICAL SKILLS:
+• Languages: JavaScript, TypeScript, Python, SQL
+• Platforms: HubSpot, Salesforce, Google Analytics, AWS
+• Tools: React, Node.js, PostgreSQL, Docker, Terraform
+• Specialties: Marketing Automation, Data Architecture, Performance Optimization`;
+
+    const blob = new Blob([resumeContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'Jacob-Darling-Resume.txt';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   const handleScheduleCall = () => {
     analytics.trackCTAClick("contact-success", "Schedule Follow-up Call");
+    
+    // Open calendar booking (using a simulated calendar URL)
+    // In production, this would link to Calendly, Acuity, or similar
+    const calendarUrl = 'https://calendly.com/jacob-darling/15min';
+    
+    // For demo purposes, we'll show a simulated booking interface
+    const bookingWindow = window.open('', '_blank', 'width=600,height=700,scrollbars=yes,resizable=yes');
+    
+    if (bookingWindow) {
+      bookingWindow.document.write(`
+        <html>
+        <head>
+          <title>Schedule a Call - Jacob Darling</title>
+          <style>
+            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 40px; background: #f8fafc; }
+            .container { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+            h1 { color: #1a202c; margin-bottom: 20px; font-size: 24px; }
+            p { color: #4a5568; line-height: 1.6; margin-bottom: 20px; }
+            .calendar { background: #e2e8f0; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0; }
+            .time-slot { display: inline-block; margin: 5px; padding: 8px 16px; background: #3182ce; color: white; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
+            .time-slot:hover { background: #2c5282; }
+            .note { font-size: 14px; color: #718096; font-style: italic; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <h1>📅 Schedule Your 15-Minute Call</h1>
+            <p>Hi! Thanks for your interest in working together. Let's schedule a quick call to discuss your project needs.</p>
+            
+            <div class="calendar">
+              <h3>Available Times This Week</h3>
+              <div style="margin-top: 15px;">
+                <div class="time-slot" onclick="selectTime(this, 'Monday 2:00 PM EST')">Mon 2:00 PM</div>
+                <div class="time-slot" onclick="selectTime(this, 'Monday 4:00 PM EST')">Mon 4:00 PM</div>
+                <div class="time-slot" onclick="selectTime(this, 'Tuesday 10:00 AM EST')">Tue 10:00 AM</div>
+                <div class="time-slot" onclick="selectTime(this, 'Tuesday 3:00 PM EST')">Tue 3:00 PM</div>
+                <div class="time-slot" onclick="selectTime(this, 'Wednesday 11:00 AM EST')">Wed 11:00 AM</div>
+                <div class="time-slot" onclick="selectTime(this, 'Wednesday 2:00 PM EST')">Wed 2:00 PM</div>
+                <div class="time-slot" onclick="selectTime(this, 'Thursday 9:00 AM EST')">Thu 9:00 AM</div>
+                <div class="time-slot" onclick="selectTime(this, 'Friday 1:00 PM EST')">Fri 1:00 PM</div>
+              </div>
+            </div>
+            
+            <div id="confirmation" style="display: none; background: #c6f6d5; padding: 15px; border-radius: 6px; margin-top: 20px;">
+              <strong>✅ Time Selected:</strong> <span id="selected-time"></span><br>
+              <small>A calendar invite will be sent to the email you provided in your contact form.</small>
+            </div>
+            
+            <p class="note">💡 We'll use this time to discuss your project requirements, timeline, and how I can help achieve your goals.</p>
+          </div>
+          
+          <script>
+            function selectTime(element, time) {
+              // Highlight selected time
+              document.querySelectorAll('.time-slot').forEach(slot => slot.style.background = '#3182ce');
+              element.style.background = '#22543d';
+              
+              // Show confirmation
+              document.getElementById('selected-time').textContent = time;
+              document.getElementById('confirmation').style.display = 'block';
+              
+              // Auto-close after 3 seconds
+              setTimeout(() => {
+                alert('Calendar invite sent! I\'ll send you a meeting link shortly.');
+                window.close();
+              }, 2000);
+            }
+          </script>
+        </body>
+        </html>
+      `);
+      
+      bookingWindow.document.close();
+    } else {
+      // Fallback if popup is blocked
+      alert('Please allow popups to access the scheduling calendar. Alternatively, email me directly to schedule a call.');
+    }
   };
 
   const nextSteps = [
