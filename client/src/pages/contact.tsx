@@ -6,9 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { CalendarEmbed } from "@/components/ui/calendar-embed";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { analytics } from "@/lib/analytics";
+import { useLocation } from "wouter";
 import { Linkedin, Github, Calendar, Download, Mail, Phone } from "lucide-react";
 
 export default function Contact() {
@@ -21,6 +23,7 @@ export default function Contact() {
     website: "", // Honeypot field
   });
   const { toast } = useToast();
+  const [, navigate] = useLocation();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -47,22 +50,11 @@ export default function Contact() {
       const result = await response.json();
 
       if (result.success) {
-        toast({
-          title: "Message sent!",
-          description: result.message,
-        });
-
         // Track successful submission
         analytics.trackContactSubmit(true, utmSource);
 
-        // Reset form
-        setFormData({
-          name: "",
-          email: "",
-          company: "",
-          message: "",
-          website: "",
-        });
+        // Redirect to success page instead of showing toast
+        navigate('/contact/success');
       } else {
         throw new Error(result.message || "Failed to send message");
       }
@@ -106,14 +98,6 @@ export default function Contact() {
     }
   };
 
-  const handleBookCall = () => {
-    analytics.trackCTAClick("contact", "Book Calendar Time");
-    // In a real implementation, this would open a calendar booking widget
-    toast({
-      title: "Calendar integration",
-      description: "This would open a calendar booking widget.",
-    });
-  };
 
   const contactMethods = [
     {
@@ -146,13 +130,30 @@ export default function Contact() {
       <main className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4" data-testid="contact-page-heading">
+            {/* Hero Section */}
+            <div className="text-center mb-16">
+              <h1 className="text-display font-bold mb-6" data-testid="contact-page-heading">
                 Let's Build Something Great Together
               </h1>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="contact-page-description">
+              <p className="text-body-lg text-muted-foreground max-w-3xl mx-auto mb-8" data-testid="contact-page-description">
                 Ready to discuss how strategic marketing automation and systems architecture can accelerate your growth? I'd love to hear about your challenges and explore how we can solve them together.
               </p>
+              
+              {/* Value Proposition Stats */}
+              <div className="flex flex-wrap justify-center gap-8 text-center">
+                <div>
+                  <div className="text-h4 font-bold text-primary">24hr</div>
+                  <div className="text-caption text-muted-foreground">Response Time</div>
+                </div>
+                <div>
+                  <div className="text-h4 font-bold text-primary">15min</div>
+                  <div className="text-caption text-muted-foreground">Discovery Call</div>
+                </div>
+                <div>
+                  <div className="text-h4 font-bold text-primary">100%</div>
+                  <div className="text-caption text-muted-foreground">No Sales Pressure</div>
+                </div>
+              </div>
             </div>
 
             {/* Contact Methods */}
@@ -184,9 +185,9 @@ export default function Contact() {
               })}
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-12">
-              {/* Contact Form */}
-              <div>
+            <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
+              {/* Contact Form - Takes 3 columns */}
+              <div className="lg:col-span-3">
                 <Card>
                   <CardHeader>
                     <CardTitle data-testid="contact-form-title">Send a Message</CardTitle>
@@ -275,31 +276,13 @@ export default function Contact() {
                 </Card>
               </div>
 
-              {/* Quick Actions & Info */}
-              <div className="space-y-6">
-                {/* Schedule Call */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center" data-testid="schedule-call-card-title">
-                      <Calendar className="w-5 h-5 mr-2 text-primary" />
-                      Schedule a Call
-                    </CardTitle>
-                    <CardDescription data-testid="schedule-call-card-description">
-                      Book a 15-minute portfolio walk-through to discuss your marketing technology challenges and explore potential solutions.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button 
-                      className="w-full" 
-                      size="lg"
-                      onClick={handleBookCall}
-                      data-testid="button-schedule-call"
-                    >
-                      <Calendar className="w-4 h-4 mr-2" />
-                      Book Calendar Time
-                    </Button>
-                  </CardContent>
-                </Card>
+              {/* Right Sidebar - Takes 2 columns */}
+              <div className="lg:col-span-2 space-y-6">
+                {/* Calendar Embed */}
+                <CalendarEmbed 
+                  title="Schedule a Call"
+                  description="Book a 15-minute portfolio walk-through to discuss your marketing technology challenges."
+                />
 
                 {/* Resume Download */}
                 <Card>

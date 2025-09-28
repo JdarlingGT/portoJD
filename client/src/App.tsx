@@ -11,6 +11,7 @@ import CaseStudy from "@/pages/work/[slug]";
 import Toolbox from "@/pages/toolbox";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
+import ContactSuccess from "@/pages/contact-success";
 
 function Router() {
   return (
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/toolbox" component={Toolbox} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
+      <Route path="/contact/success" component={ContactSuccess} />
       <Route component={NotFound} />
     </Switch>
   );
