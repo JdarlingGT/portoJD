@@ -42,6 +42,10 @@ export class MemStorage implements IStorage {
     const id = randomUUID();
     const contactSubmission: ContactSubmission = {
       ...submission,
+      company: submission.company || null,
+      utmSource: submission.utmSource || null,
+      ipAddress: submission.ipAddress || null,
+      userAgent: submission.userAgent || null,
       id,
       createdAt: new Date(),
     };
@@ -53,6 +57,10 @@ export class MemStorage implements IStorage {
     const id = randomUUID();
     const analyticsEvent: AnalyticsEvent = {
       ...event,
+      properties: event.properties || null,
+      sessionId: event.sessionId || null,
+      ipAddress: event.ipAddress || null,
+      userAgent: event.userAgent || null,
       id,
       createdAt: new Date(),
     };

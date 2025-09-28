@@ -1,0 +1,194 @@
+Context You already built a solid foundation: Next.js/TS app with hero, featured work, case studies (Problem → Approach → Impact), toolbox, about, and contact with SendGrid. Now switch into "impress hiring managers" mode. This pass upgrades visual design, interaction quality, information scent, and conversion ergonomics—without regressing on performance or a11y.
+
+Your Role You are a senior product designer + front‑end lead + CRO strategist. Ship pixel‑level polish, tasteful motion, and friction‑free paths to "book a call"—while keeping Lighthouse/A11y targets high.
+
+High‑Level Goals
+
+Transform current UI into a modern, premium aesthetic (think clean editorial + product SaaS hybrid).
+
+Make impact scannable: results and artifacts up top, narrative below.
+
+Upgrade Contact and Case Study pages to feel "executive‑ready" and conversion‑oriented.
+
+Maintain Perf ≥95 (mobile), A11y ≥92, Best Practices/SEO ≥95 after all changes.
+
+Design System Upgrade (implement tokens & components)
+
+Tokens (Tailwind + CSS vars)
+
+Typography scale (fluid): --font-display: clamp(2.2rem, 2.6vw + 1rem, 3rem) --font-h1: clamp(1.8rem, 1.6vw + 1rem, 2.4rem) --font-h2: clamp(1.4rem, 1.2vw + 0.9rem, 1.8rem) --font-body: clamp(1rem, 0.35vw + 0.9rem, 1.1rem)
+
+Radius: --r-card: 1.25rem; --r-chip: 999px
+
+Shadows: --sh-card: 0 8px 30px rgba(0,0,0,0.06); --sh-hover: 0 12px 40px rgba(0,0,0,0.10)
+
+Spacing: --space-section: clamp(2.5rem, 6vw, 5rem)
+
+Color (light/dark): background, surface, muted, border, primary (accent), success, warning; provide HSL vars for easy theming
+
+Motion: --dur-fast: 160ms; --dur-med: 260ms; --easing: cubic-bezier(.2,.7,.2,1)
+
+Typography
+
+Headings: switch to a modern grotesk (e.g., Inter/Space Grotesk) or keep current serif for display but pair with humanist sans for body. Tighten letter‑spacing for H1/H2 and increase line‑height on longform.
+
+Components (new or upgraded)
+
+AppHeader: sticky, reduced height on scroll, active link indicator, subtle bottom border blur.
+
+StatChips: compact KPI chips with icon + label + value (e.g., +112% Attribution Accuracy). Provide aria‑labels with baseline/value.
+
+StatBar: horizontal highlight panel under the hero on work detail, summarizing 3–4 key outcomes.
+
+Card v2: soft shadow, 1px border, hover lift + translate‑y‑1, focus-visible ring.
+
+FilterChips: segmented toggle group with overflow scroll on mobile; maintains URL query state.
+
+EvidenceGallery: responsive grid + lightbox with keyboard navigation; supports images, GIFs, MP4.
+
+BeforeAfterSlider: accessible slider with touch/keyboard support for visual diffs.
+
+TOC Sticky: on case studies, a sticky sidebar that highlights reading progress.
+
+TestimonialSlider: snap carousel with manual controls; auto‑advance only when user opts in.
+
+LogoWall: grayscale logos with hover to full color.
+
+ContactCTA: sticky mobile footer with "Book a 15‑min walk‑through".
+
+EmptyState + LoadingSkeletons for work grid and case study.
+
+Page‑Level Upgrades A) Home
+
+New hero layout with headline on left, KPI trio and credibility logos on right.
+
+Add mini case study rail (3 cards) with “Read in 2 min” badges.
+
+Insert LogoWall of notable clients/sectors (can be generic if redacted).
+
+Add microcopy under primary CTA: “Response within 24h • No sales fluff.”
+
+B) Work (Index)
+
+Add filter chips (role: Eng, Product, Growth; focus: Performance, Attribution, Security…).
+
+Cards use Card v2 with 1–2 KPIs surfaced. Include reading time + stack badges.
+
+Add search (client‑side) with fuzzy match over title/summary/tags.
+
+C) Work (Detail)
+
+Above title, surface breadcrumb + reading time.
+
+Under hero, add StatBar with 3–4 outcomes. Float a “View artifacts” anchor.
+
+Introduce TOC Sticky for long reads.
+
+EvidenceGallery section with captions citing the outcome it supports.
+
+Add BeforeAfterSlider when filename pattern includes before/after.
+
+Add “Playbook” block (bulleted techniques) + “What I’d do next” to show senior thinking.
+
+Related work rail at bottom (same tags).
+
+D) Toolbox
+
+Convert long cards into compact "Challenge → Action → Result" tiles with iconography.
+
+Add copy scanlines: 1‑sentence outcome at the end of each tile.
+
+E) Contact
+
+Two‑column: form on left, calendar embed on right (Calendly or Cal.com).
+
+Keep options grid (Email, Video Call, Phone) but compress copy; add trust badges (response SLAs).
+
+Add hidden UTM source, medium, campaign; persist in localStorage.
+
+Success page shows 2 recommended case studies + ICS calendar attach.
+
+F) About
+
+Add “Principles & Working Style” list + "How we ship" mini timeline (Kickoff → Metrics → Launch → Iterate).
+
+Interaction & Motion (Framer Motion)
+
+Hover: cards lift 2–4px with subtle shadow and scale 1.01 (prefers‑reduced‑motion respected).
+
+Entrance: section fade/translate‑y‑8 on viewport with stagger.
+
+Active filter chips animate underline.
+
+Accessibility & Semantics
+
+Ensure heading order logical; all interactive elements have focus states.
+
+Keyboard access: header menu, carousels, lightbox, before/after slider.
+
+Descriptive alt on all images; decorative images alt="".
+
+Engineering Tasks (concrete)
+
+Tailwind/theme: add tokens and update tailwind.config.ts and global CSS.
+
+Replace current cards with Card v2 and StatChips components.
+
+Implement FilterChips with URL sync; add fuzzy search (client‑side) on Work index.
+
+Build EvidenceGallery + BeforeAfterSlider and wire to case study frontmatter artifacts.
+
+Add TOC sticky using @/components/toc driven by MDX headings.
+
+Add ContactCTA sticky on mobile; implement dismiss logic via localStorage.
+
+Add calendar embed (Calendly/Cal.com) on Contact; ensure noopener/noreferrer and lazy load.
+
+Analytics: track filter_select, search_query, toc_click, gallery_open, cta_book_call.
+
+Performance: code‑split gallery/slider; use dynamic import; prefetch on hover; ensure image sizes correct.
+
+SEO: per‑page OG image generator (title + 1–2 KPIs); ensure JSON‑LD for Person/Article/Breadcrumb.
+
+Copy Polish (generate variants)
+
+Hero headline: generate 3 options; subhead 3 options; CTA labels 3 options (book call, view work, download resume).
+
+Case study leads: rewrite first paragraph to foreground outcome in first sentence.
+
+Microcopy for contact trust (e.g., “Replies in 24h. Zero spam.”).
+
+Data & Content Model Adjustments
+
+Extend case study frontmatter with: readingTime, kpis[], tags[], confidential, evidence[], beforeAfter[].
+
+Add clientSectors[] for logo wall grouping; support redacted labels.
+
+QA & Acceptance (must pass)
+
+
+
+
+Deliver Back
+
+Updated repo with new components and tokens
+
+README section: "Impress‑Mode UI Kit" + how to add KPIs/artifacts
+
+2 screenshots (light/dark) per key page + Lighthouse/Axe reports
+
+Kickoff Now
+
+Apply tokens + typography refresh.
+
+Upgrade cards, chips, and hero.
+
+Implement Work filters/search and Case Study StatBar + gallery/slider + TOC.
+
+Modernize Contact with calendar embed + sticky CTA + UTM capture.
+
+Run QA checklist and ship.
+
+Tone & Brand
+
+Senior, confident, proof‑driven. Minimal fluff. The interface should feel like someone who ships and measures impact—not a Dribbble touris

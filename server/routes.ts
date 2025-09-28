@@ -26,7 +26,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
       // Send email notification
-      const emailSent = await emailService.sendContactNotification(validatedData);
+      const emailSent = await emailService.sendContactNotification({
+        ...validatedData,
+        company: validatedData.company || undefined,
+        utmSource: validatedData.utmSource || undefined
+      });
       
       if (!emailSent) {
         console.error("Failed to send email notification for contact submission:", submission.id);
