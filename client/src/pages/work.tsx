@@ -129,18 +129,18 @@ export default function Work() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground page-enter">
       <Header />
 
-      <main className="py-section">
+      <main className="py-section page-enter">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
-            <div className="text-center mb-16 space-y-6">
-              <h1 className="text-h1" data-testid="work-page-heading">
+            <div className="text-center mb-16 space-y-6 animate-fade-in">
+              <h1 className="text-h1 animate-slide-up" data-testid="work-page-heading">
                 Case Studies & Deep Dives
               </h1>
-              <p className="text-body-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed" data-testid="work-page-description">
+              <p className="text-body-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-slide-up stagger-1" data-testid="work-page-description">
                 Detailed breakdowns of marketing systems architecture, strategic implementation, and measurable impact across diverse projects and challenges.
               </p>
             </div>
@@ -155,7 +155,7 @@ export default function Work() {
                     placeholder="Search case studies..."
                     value={searchQuery}
                     onChange={handleSearchChange}
-                    className="pl-10 pr-10 transition-all duration-fast focus:shadow-card"
+                    className="pl-10 pr-10 focus-ring animate-slide-up stagger-2"
                     data-testid="work-search-input"
                   />
                   {searchQuery && (
@@ -173,18 +173,20 @@ export default function Work() {
               </div>
 
               {/* Filter Chips */}
-              <FilterChips
-                options={filterOptions}
-                value={selectedTags}
-                onValueChange={handleTagsChange}
-                multiSelect={true}
-                urlSync={{ paramName: 'tags' }}
-                className="justify-center"
-              />
+              <div className="animate-slide-up stagger-3">
+                <FilterChips
+                  options={filterOptions}
+                  value={selectedTags}
+                  onValueChange={handleTagsChange}
+                  multiSelect={true}
+                  urlSync={{ paramName: 'tags' }}
+                  className="justify-center"
+                />
+              </div>
             </div>
 
             {/* Results Count */}
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-8 animate-fade-in stagger-4">
               <p className="text-sm text-muted-foreground" data-testid="results-count">
                 {filteredCaseStudies.length} {filteredCaseStudies.length === 1 ? 'project' : 'projects'}
                 {searchQuery && ` matching "${searchQuery}"`}
@@ -198,18 +200,20 @@ export default function Work() {
                 const readingTime = getReadingTime(caseStudy);
                 
                 return (
-                  <Link key={caseStudy.slug} href={`/work/${caseStudy.slug}`}>
-                    <ProjectCard
-                      title={`${caseStudy.emoji} ${caseStudy.title}`}
-                      description={caseStudy.problem}
-                      kpis={kpis}
-                      tags={caseStudy.tags}
-                      readingTime={readingTime}
-                      onClick={() => handleCaseStudyClick(caseStudy.slug)}
-                      className="h-full cursor-pointer"
-                      data-testid={`case-study-card-${caseStudy.slug}`}
-                    />
-                  </Link>
+                  <div key={caseStudy.slug} className={`animate-scale-in stagger-${Math.min((196 + caseStudies.findIndex(cs => cs.slug === caseStudy.slug)) % 5 + 1, 5)}`}>
+                    <Link href={`/work/${caseStudy.slug}`}>
+                      <ProjectCard
+                        title={`${caseStudy.emoji} ${caseStudy.title}`}
+                        description={caseStudy.problem}
+                        kpis={kpis}
+                        tags={caseStudy.tags}
+                        readingTime={readingTime}
+                        onClick={() => handleCaseStudyClick(caseStudy.slug)}
+                        className="h-full cursor-pointer focus-ring"
+                        data-testid={`case-study-card-${caseStudy.slug}`}
+                      />
+                    </Link>
+                  </div>
                 );
               })}
             </div>

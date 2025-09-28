@@ -15,7 +15,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground page-enter">
       {/* Skip to content link */}
       <a
         href="#main-content"
@@ -27,7 +27,7 @@ export default function Home() {
 
       <Header />
 
-      <main id="main-content">
+      <main id="main-content" className="page-enter">
         <HeroSection />
         <FeaturedWorkSection />
         <PhilosophySection />
@@ -39,9 +39,9 @@ export default function Home() {
       <Footer />
 
       {/* Sticky Mobile CTA */}
-      <div className="fixed bottom-4 left-4 right-4 md:hidden z-50">
+      <div className="fixed bottom-4 left-4 right-4 md:hidden z-50 animate-slide-up stagger-5">
         <Button 
-          className="w-full shadow-lg" 
+          className="w-full shadow-lg hover-lift hover-glow active-press focus-ring" 
           onClick={handleMobileCTA}
           data-testid="button-mobile-sticky-cta"
         >

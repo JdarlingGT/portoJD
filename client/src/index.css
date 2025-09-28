@@ -108,6 +108,18 @@
   html {
     scroll-behavior: smooth;
   }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
 @layer components {
@@ -200,6 +212,7 @@
 }
 
 @layer utilities {
+  /* Enhanced Entrance Animations */
   .animate-fade-in {
     animation: fadeIn 0.5s ease-in-out;
   }
@@ -208,10 +221,76 @@
     animation: slideUp 0.6s ease-out;
   }
 
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out;
+  }
+
   .animate-scale-in {
     animation: scaleIn 0.4s ease-out;
   }
 
+  .animate-bounce-in {
+    animation: bounceIn 0.8s ease-out;
+  }
+
+  /* Staggered Animation Delays */
+  .stagger-1 { animation-delay: 100ms; }
+  .stagger-2 { animation-delay: 200ms; }
+  .stagger-3 { animation-delay: 300ms; }
+  .stagger-4 { animation-delay: 400ms; }
+  .stagger-5 { animation-delay: 500ms; }
+
+  /* Enhanced Hover Effects */
+  .hover-lift {
+    transition: all var(--dur-med) var(--easing);
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sh-hover);
+  }
+
+  .hover-glow {
+    transition: all var(--dur-med) var(--easing);
+    position: relative;
+  }
+  .hover-glow:hover {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+
+  /* Enhanced Focus States */
+  .focus-ring {
+    transition: all var(--dur-fast) var(--easing);
+  }
+  .focus-ring:focus-visible {
+    outline: 2px solid hsl(var(--primary)) !important;
+    outline-offset: 2px !important;
+    transform: scale(1.02);
+    /* Override Tailwind ring styles */
+    box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--primary)) !important;
+    border-color: hsl(var(--primary)) !important;
+  }
+  
+  /* Alternative focus ring for inputs that use ring system */
+  .focus-ring-alt:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--primary)) !important;
+    border-color: hsl(var(--primary)) !important;
+    transform: scale(1.02);
+  }
+
+  /* Active States */
+  .active-press {
+    transition: transform var(--dur-fast) var(--easing);
+  }
+  .active-press:active {
+    transform: scale(0.98);
+  }
+
+  /* Enhanced Keyframe Animations */
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -222,9 +301,36 @@
     to { transform: translateY(0); opacity: 1; }
   }
 
+  @keyframes slideInLeft {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  @keyframes slideInRight {
+    from { transform: translateX(20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
   @keyframes scaleIn {
     from { transform: scale(0.95); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    70% { transform: scale(0.9); opacity: 0.9; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Page Transition Animations */
+  @keyframes pageSlideIn {
+    from { transform: translateY(8px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .page-enter {
+    animation: pageSlideIn 0.4s ease-out;
   }
 }
 

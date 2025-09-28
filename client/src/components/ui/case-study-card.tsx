@@ -16,7 +16,8 @@ export function CaseStudyCard({ caseStudy, className = "" }: CaseStudyCardProps)
 
   return (
     <div 
-      className={`bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow animate-scale-in ${className}`}
+      className={`bg-card border border-border rounded-xl p-6 hover-lift focus-ring group transition-all duration-med ${className}`}
+      tabIndex={0}
       data-testid={`case-study-card-${caseStudy.slug}`}
     >
       <div className="flex items-center mb-4">
@@ -47,7 +48,7 @@ export function CaseStudyCard({ caseStudy, className = "" }: CaseStudyCardProps)
       
       <Link href={`/work/${caseStudy.slug}`}>
         <Button 
-          className="w-full" 
+          className="w-full hover-glow active-press focus-ring group-hover:bg-primary group-hover:text-primary-foreground" 
           onClick={handleReadMore}
           data-testid={`button-read-case-study-${caseStudy.slug}`}
         >

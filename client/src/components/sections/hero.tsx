@@ -43,7 +43,7 @@ export function HeroSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left: Headline & CTA */}
-          <div className="space-y-8 animate-slide-up">
+          <div className="space-y-8 animate-slide-in-left">
             <div className="space-y-6">
               <h1 className="text-display" data-testid="hero-heading">
                 <span className="gradient-text">Marketing Systems</span>
@@ -61,7 +61,7 @@ export function HeroSection() {
                 <Button 
                   size="lg" 
                   onClick={handlePrimaryCTA}
-                  className="transition-all duration-med ease-smooth hover:shadow-hover"
+                  className="hover-lift hover-glow active-press focus-ring"
                   data-testid="button-primary-cta"
                 >
                   Book a 15-min Walk-through
@@ -70,7 +70,7 @@ export function HeroSection() {
                   variant="outline" 
                   size="lg" 
                   onClick={handleSecondaryCTA}
-                  className="transition-all duration-med ease-smooth"
+                  className="hover-lift focus-ring active-press"
                   data-testid="button-secondary-cta"
                 >
                   View Case Studies
@@ -85,7 +85,7 @@ export function HeroSection() {
           </div>
 
           {/* Right: KPIs & Credibility */}
-          <div className="space-y-10 animate-slide-up [animation-delay:200ms]">
+          <div className="space-y-10 animate-slide-in-right stagger-2">
             {/* KPI Trio */}
             <div className="space-y-4">
               <h2 className="text-sm font-medium text-muted-foreground tracking-wide uppercase">

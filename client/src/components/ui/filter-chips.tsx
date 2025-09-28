@@ -101,7 +101,7 @@ export function FilterChips({
               variant="ghost"
               size="sm"
               onClick={clearAll}
-              className="text-xs h-8 px-3 text-muted-foreground hover:text-foreground"
+              className="text-xs h-8 px-3 text-muted-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               data-testid="filter-clear-all"
             >
               Clear all
@@ -119,7 +119,7 @@ export function FilterChips({
                   onClick={() => handleToggle(option.id)}
                   className={cn(
                     "h-8 px-3 text-xs font-medium rounded-chip transition-all duration-fast ease-smooth",
-                    "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                    "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
                     "whitespace-nowrap flex-shrink-0",
                     isSelected && [
                       "bg-primary text-primary-foreground shadow-sm",
