@@ -19,6 +19,8 @@ import Contact from "@/pages/contact";
 import ContactSuccess from "@/pages/contact-success";
 import Preloader from "@/components/ui/Preloader";
 import { CursorTrail } from "@/components/ui/CursorTrail";
+import CaseStudies from "@/pages/CaseStudies";
+import DeepDive from "@/pages/DeepDive";
 
 function Router() {
   return (
@@ -26,6 +28,8 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/work" component={Work} />
       <Route path="/work/:slug" component={CaseStudy} />
+      <Route path="/case-studies" component={CaseStudies} />
+      <Route path="/deep-dive/:slug" component={DeepDive} />
       <Route path="/toolbox" component={Toolbox} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
