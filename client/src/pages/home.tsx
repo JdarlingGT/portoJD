@@ -1,7 +1,5 @@
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { HeroSection } from "@/components/sections/hero";
-import { FeaturedWorkSection } from "@/components/sections/featured-work";
+import Hero from "@/sections/Hero";
+import CaseStudies from "@/sections/CaseStudies";
 import { PhilosophySection } from "@/components/sections/philosophy";
 import { SkillsOverviewSection } from "@/components/sections/skills-overview";
 import { AboutSection } from "@/components/sections/about-section";
@@ -25,19 +23,16 @@ export default function Home() {
         Skip to main content
       </a>
 
-      <Header />
-
       <main id="main-content" className="page-enter">
-        <HeroSection />
-        <FeaturedWorkSection />
+        <Hero />
+        <CaseStudies />
         <PhilosophySection />
         <SkillsOverviewSection />
         <AboutSection />
         <ContactSection />
       </main>
 
-      <Footer />
-
+      
       {/* Sticky Mobile CTA */}
       <div className="fixed bottom-4 left-4 right-4 md:hidden z-50 animate-slide-up stagger-5">
         <Button 

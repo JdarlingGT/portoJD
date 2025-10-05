@@ -6,6 +6,10 @@ export default {
   theme: {
     extend: {
       colors: {
+        base: '#0F0F0F',
+        accentCyan: '#00FFFF',
+        accentCoral: '#FF6F61',
+        accentLime: '#C0FF33',
         background: "hsl(var(--background))",
         surface: "hsl(var(--surface))",
         foreground: "hsl(var(--foreground))",
