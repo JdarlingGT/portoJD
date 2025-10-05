@@ -1,60 +1,21 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import aboutData from '../data/about.json';
+import React, { useState } from "react";
 
-const TestimonialsCarousel = () => {
-  const [index, setIndex] = useState(0);
-  const testimonials = aboutData.testimonials;
-
-  const paginate = (newDirection: number) => {
-    setIndex((prevIndex) => (prevIndex + newDirection + testimonials.length) % testimonials.length);
-  };
-
-  const variants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0
-    })
-  };
-
+type T = { quote: string; author: string; title?: string; company?: string };
+export default function TestimonialsCarousel({ items = [] as T[] }) {
+  const [i, setI] = useState(0);
+  if (!items?.length) return null;
+  const cur = items[i];
   return (
-    <div className="relative max-w-3xl mx-auto overflow-hidden">
-      <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-center mb-8">What Others Say</h2>
-      <AnimatePresence initial={false} custom={index}>
-        <motion.div
-          key={index}
-          custom={index}
-          variants={variants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{ x: { type: 'spring', stiffness: 300, damping: 30 }, opacity: { duration: 0.2 } }}
-          className="w-full text-center px-12"
-        >
-          <p className="text-lg md:text-xl italic text-slate-300 mb-4">"{testimonials[index].quote}"</p>
-          <p className="font-bold text-slate-100">{testimonials[index].name}</p>
-          <p className="text-sm text-slate-400">{testimonials[index].title}</p>
-        </motion.div>
-      </AnimatePresence>
-      <button onClick={() => paginate(-1)} className="absolute top-1/2 -translate-y-1/2 left-0 z-10 p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
-        <ChevronLeft className="w-6 h-6" />
-      </button>
-      <button onClick={() => paginate(1)} className="absolute top-1/2 -translate-y-1/2 right-0 z-10 p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
-        <ChevronRight className="w-6 h-6" />
-      </button>
+    <div className="rounded-2xl bg-white/5 border border-white/10 p-6 text-center">
+      <p className="italic text-gray-200">“{cur.quote}”</p>
+      <p className="mt-3 font-medium">{cur.author}</p>
+      <p className="text-sm text-gray-400">{[cur.title, cur.company].filter(Boolean).join(" — ")}</p>
+      <div className="mt-4 flex justify-center gap-2">
+        {items.map((_, idx) => (
+          <button key={idx} onClick={() => setI(idx)}
+            className={`h-2 w-2 rounded-full ${idx===i ? "bg-accentCyan" : "bg-white/20"}`} />
+        ))}
+      </div>
     </div>
   );
-};
-
-export default TestimonialsCarousel;
+}

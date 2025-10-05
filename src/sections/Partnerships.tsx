@@ -1,35 +1,19 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { staggerContainer, fadeIn, slideUp } from '../styles/animations';
-import aboutData from '../data/about.json';
 
-const Partnerships = () => {
+type Partner = { client: string; type?: string; results?: string[] };
+export default function Partnerships({ items = [] as Partner[] }) {
+  if (!items?.length) return null;
   return (
-    <motion.div
-      variants={staggerContainer}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.1 }}
-      className="text-center"
-    >
-      <motion.h2 variants={fadeIn} className="text-3xl md:text-4xl font-bold tracking-tight mb-8">
-        Key Partnerships & Roles
-      </motion.h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
-        {aboutData.partnerships.map((partner, index) => (
-          <motion.div
-            key={index}
-            variants={slideUp}
-            className="bg-white/5 border border-white/10 rounded-xl p-6 text-left"
-          >
-            <h3 className="text-xl font-bold text-cyan-400 mb-1">{partner.name}</h3>
-            <p className="text-sm font-semibold text-slate-300 mb-3">{partner.role}</p>
-            <p className="text-slate-400">{partner.description}</p>
-          </motion.div>
-        ))}
-      </div>
-    </motion.div>
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {items.map((p, i) => (
+        <div key={i} className="rounded-2xl bg-white/5 border border-white/10 p-5">
+          <h4 className="font-semibold">{p.client}</h4>
+          <p className="text-xs text-gray-400">{p.type}</p>
+          <ul className="mt-2 list-disc pl-5 text-sm text-gray-200 space-y-1">
+            {p.results?.map((r, idx) => <li key={idx}>{r}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
   );
-};
-
-export default Partnerships;
+}

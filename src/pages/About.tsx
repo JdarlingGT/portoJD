@@ -1,79 +1,84 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import about from "../data/about.json";
+import HighlightChips from "../sections/HighlightChips";
+import PrinciplesGrid from "../sections/PrinciplesGrid";
+import StackTiles from "../sections/StackTiles";
+import TimelineVertical from "../sections/TimelineVertical";
+import Partnerships from "../sections/Partnerships";
+import TestimonialsCarousel from "../sections/TestimonialsCarousel";
+import CTACluster from "../sections/CTACluster";
+import { motion } from "framer-motion";
+import { slideUp } from "../styles/animations";
 
-// Import data
-import aboutData from '../data/about.json';
-
-// Import sections
-import HighlightChips from '../sections/HighlightChips';
-import PrinciplesGrid from '../sections/PrinciplesGrid';
-import StackTiles from '../sections/StackTiles';
-import TimelineVertical from '../sections/TimelineVertical';
-import Partnerships from '../sections/Partnerships';
-import TestimonialsCarousel from '../sections/TestimonialsCarousel';
-import CTACluster from '../sections/CTACluster';
-
-// Import UI components
-import AnchorTOC from '../components/ui/AnchorTOC';
-
-// Import animation variants
-import { fadeIn, staggerContainer } from '../styles/animations';
-
-const About = () => {
-  const tocItems = [
-    { id: 'story', label: 'My Story' },
-    { id: 'principles', label: 'Principles' },
-    { id: 'stack', label: 'Stack' },
-    { id: 'journey', label: 'Journey' },
-    { id: 'partnerships', label: 'Partnerships' },
-    { id: 'testimonials', label: 'Testimonials' },
-  ];
+export default function About() {
+  const { hero, highlights, principles, stackTiles, timeline, partnerships, testimonials } = about as any;
 
   return (
-    <div className="relative">
-      <AnchorTOC items={tocItems} />
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="show"
-        className="space-y-24 md:space-y-32"
-      >
-        <section id="story" className="scroll-mt-20">
-          <motion.div variants={fadeIn} className="container mx-auto px-4 text-center max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">{aboutData.hero.title}</h1>
-            <p className="text-lg md:text-xl text-slate-300">{aboutData.hero.subtitle}</p>
-          </motion.div>
-          <motion.div variants={fadeIn} className="mt-8">
-            <HighlightChips />
-          </motion.div>
-        </section>
+    <main className="min-h-screen bg-[#0F0F0F] text-white">
+      {/* HERO */}
+      <section id="story" className="py-16 border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-6">
+          <motion.h1 variants={slideUp} initial="hidden" whileInView="show" className="text-4xl font-bold">
+            {hero.headline}
+          </motion.h1>
+          <motion.p variants={slideUp} initial="hidden" whileInView="show" className="mt-3 text-lg text-gray-300 max-w-3xl">
+            {hero.body}
+          </motion.p>
+          <div className="mt-6 flex gap-3">
+            <a className="rounded-lg px-4 py-2 bg-white/10 hover:bg-white/20" href={hero.ctaPrimary.href}>{hero.ctaPrimary.label}</a>
+            <a className="rounded-lg px-4 py-2 bg-white/10 hover:bg-white/20" href={hero.ctaSecondary.href}>{hero.ctaSecondary.label}</a>
+          </div>
+          <HighlightChips items={highlights} />
+        </div>
+      </section>
 
-        <section id="principles" className="scroll-mt-20 container mx-auto px-4">
-          <PrinciplesGrid />
-        </section>
+      {/* PRINCIPLES */}
+      <section id="principles" className="py-16 border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-4">The Principles That Drive My Work</h2>
+          <PrinciplesGrid items={principles} />
+        </div>
+      </section>
 
-        <section id="stack" className="scroll-mt-20 container mx-auto px-4">
-          <StackTiles />
-        </section>
+      {/* STACK TILES */}
+      <section id="stack" className="py-16 border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-4">My Interactive MarTech Stack</h2>
+          <StackTiles tiles={stackTiles} />
+        </div>
+      </section>
 
-        <section id="journey" className="scroll-mt-20 container mx-auto px-4">
-          <TimelineVertical />
-        </section>
+      {/* JOURNEY */}
+      <section id="journey" className="py-16 border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-4">Professional Journey & Impact</h2>
+          <TimelineVertical roles={timeline} />
+        </div>
+      </section>
 
-        <section id="partnerships" className="scroll-mt-20 container mx-auto px-4">
-          <Partnerships />
-        </section>
+      {/* PARTNERSHIPS */}
+      <section id="partnerships" className="py-16 border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-4">Ongoing Strategic Partnerships</h2>
+          <Partnerships items={partnerships} />
+        </div>
+      </section>
 
-        <section id="testimonials" className="scroll-mt-20 container mx-auto px-4">
-          <TestimonialsCarousel />
-        </section>
+      {/* TESTIMONIALS */}
+      <section id="testimonials" className="py-16 border-b border-white/10">
+        <div className="max-w-3xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-4 text-center">What Colleagues & Clients Say</h2>
+          <TestimonialsCarousel items={testimonials} />
+        </div>
+      </section>
 
-        <section id="contact" className="scroll-mt-20 container mx-auto px-4">
+      {/* CTA CLUSTER */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold mb-4">Ready to Transform Your Marketing Technology?</h2>
           <CTACluster />
-        </section>
-      </motion.div>
-    </div>
+        </div>
+      </section>
+    </main>
   );
-};
-
-export default About;
+}
