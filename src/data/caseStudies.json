@@ -1,0 +1,29 @@
+[
+  {
+    "id":"launchpad",
+    "slug":"the-launchpad",
+    "title":"Automation & CRM — The Launchpad",
+    "subtitle":"Lifecycle automation across LMS, Woo, CRM",
+    "roi":40,
+    "image":"/assets/images/events-hub-instructor-tools-hero.png",
+    "category":"Automation"
+  },
+  {
+    "id":"compass",
+    "slug":"the-compass",
+    "title":"Attribution & Tracking — The Compass",
+    "subtitle":"Click-to-sale with server events + GA4",
+    "roi":35,
+    "image":"/assets/images/evidence-plus-infographic-hero.png",
+    "category":"Analytics"
+  },
+  {
+    "id":"engine-room",
+    "slug":"the-engine-room",
+    "title":"Performance & Caching — The Engine Room",
+    "subtitle":"Edge caching + CWV wins",
+    "roi":0,
+    "image":"/assets/images/edge-image-optimization-pipeline-hero.png",
+    "category":"E-commerce"
+  }
+]

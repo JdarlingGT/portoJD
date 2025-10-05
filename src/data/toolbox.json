@@ -1,0 +1,19 @@
+{
+  "Automation & CRM":[
+    {"name":"FluentCRM","why":"Tag-based automation inside WordPress.","link":"#","role":"primary"},
+    {"name":"WP Fusion","why":"Sync users/tags across LMS/CRM.","link":"#","role":"primary"}
+  ],
+  "Analytics & Tracking":[
+    {"name":"GTM/GA4","why":"Flexible schema + server events.","link":"#","role":"primary"},
+    {"name":"Umami","why":"Lightweight privacy-friendly analytics.","link":"#","role":"secondary"}
+  ],
+  "Performance & Infra":[
+    {"name":"Cloudflare","why":"WAF, caching, rulesets.","link":"#","role":"primary"},
+    {"name":"Redis","why":"Object caching.","link":"#","role":"secondary"}
+  ],
+  "Dev & Systems":[
+    {"name":"React + Vite","why":"Fast dev, modern DX.","link":"#","role":"primary"},
+    {"name":"WordPress","why":"Ecosystem + extensibility.","link":"#","role":"primary"}
+  ],
+  "CurrentSetup":["FluentCRM","WP Fusion","GTM/GA4","Cloudflare","React/Vite","WordPress"]
+}

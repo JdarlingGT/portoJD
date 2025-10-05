@@ -1,0 +1,48 @@
+{
+  "columns": [
+    {
+      "label": "About",
+      "links": [
+        { "label": "My Story", "href": "/about#story" },
+        { "label": "My Process", "href": "/about#process" },
+        { "label": "Professional Journey", "href": "/about#journey" }
+      ]
+    },
+    {
+      "label": "Case Studies",
+      "links": [
+        { "label": "Project Deep Dives", "href": "/case-studies" },
+        { "label": "The Launchpad", "href": "/case-studies/the-launchpad" },
+        { "label": "The Guardian", "href": "/case-studies/the-guardian" },
+        { "label": "The Compass", "href": "/case-studies/the-compass" },
+        { "label": "The Fortress", "href": "/case-studies/the-fortress" },
+        { "label": "The Conductor", "href": "/case-studies/the-conductor" },
+        { "label": "The Engine Room", "href": "/case-studies/the-engine-room" }
+      ]
+    },
+    {
+      "label": "Toolbox",
+      "links": [
+        { "label": "Core Competencies", "href": "/toolbox#competencies" },
+        { "label": "Technical Spotlights", "href": "/toolbox#spotlights" },
+        { "label": "Technology Stack", "href": "/toolbox#stack" }
+      ]
+    },
+    {
+      "label": "Resume / CV",
+      "links": [
+        { "label": "View Résumé", "href": "/resume" },
+        { "label": "Save PDF", "href": "/resume#print" },
+        { "label": "TXT Export", "href": "/resume#txt" }
+      ]
+    },
+    {
+      "label": "Contact",
+      "links": [
+        { "label": "Email", "href": "mailto:hoosierdarling@gmail.com" },
+        { "label": "LinkedIn", "href": "https://linkedin.com/in/jacobdarling" },
+        { "label": "GitHub", "href": "https://github.com/jdarlingGT" }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,39 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
-import menuData from '../../data/menu.json';
+
+const menuData = {
+  columns: [
+    {
+      label: "About",
+      links: [
+        { label: "My Story", href: "/about#story" },
+        { label: "Principles", href: "/about#principles" },
+        { label: "Stack", href: "/about#stack" },
+        { label: "Journey", href: "/about#journey" },
+        { label: "Partnerships", href: "/about#partnerships" },
+        { label: "Testimonials", href: "/about#testimonials" },
+      ]
+    },
+    {
+      label: "Case Studies",
+      links: [
+        { label: "Browse All", href: "/case-studies" },
+        { label: "The Launchpad", href: "/deep/the-launchpad" },
+        { label: "The Compass", href: "/deep/the-compass" },
+        { label: "The Fortress", href: "/deep/the-fortress" },
+      ]
+    },
+    {
+      label: "More",
+      links: [
+        { label: "Side Projects", href: "/projects" },
+        { label: "My Toolbox", href: "/toolbox" },
+        { label: "Contact Me", href: "/contact" },
+      ]
+    },
+  ]
+};
 
 const MegaMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

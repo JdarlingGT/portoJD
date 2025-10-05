@@ -1,0 +1,20 @@
+[
+  {
+    "title":"Provider Analytics Dashboard",
+    "summary":"Custom dashboard syncing Woo/LearnDash/GA4 to surface cohort performance.",
+    "tech":["React","Node","GA4","BigQuery"],
+    "links":{"demo":"#", "repo":"#"}
+  },
+  {
+    "title":"Guardian GPT Assistant",
+    "summary":"OpenAI-powered support bot trained on docs, with CRM actions.",
+    "tech":["OpenAI","FluentCRM","WP"],
+    "links":{"demo":"#", "repo":"#"}
+  },
+  {
+    "title":"Edge Image Pipeline",
+    "summary":"Cloudflare-based optimization for sub-second LCP.",
+    "tech":["Cloudflare","Workers","S3"],
+    "links":{"demo":"#", "repo":"#"}
+  }
+]

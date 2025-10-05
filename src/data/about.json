@@ -1,67 +1,104 @@
 {
   "hero": {
-    "title": "The Architect in the Marketing Room",
-    "subtitle": "I design the story and the system—pairing creative strategy with architecture, automation and analytics. My work reduces operational drag, tightens attribution, and turns curiosity into conversion."
+    "headline": "Where Marketing Vision Meets Technical Reality",
+    "body": "Great marketing ideas often break at the handoff... I thrive on turning abstract goals into powerful, revenue-focused marketing engines.",
+    "ctaPrimary": {"label": "Schedule a Call", "href": "/contact"},
+    "ctaSecondary": {"label": "Download Résumé", "href": "/resume"}
   },
+  "highlights": [
+    "70% support ticket reduction via AI + automation",
+    "40% e-commerce conversion lift",
+    "86% cache hit rate with edge caching",
+    "Unified pipeline (web → LMS → CRM → analytics)"
+  ],
   "principles": [
+    {"title":"Bridge Builder","subtitle":"Connecting Vision with Reality","copy":"Translate ambitious strategy into measurable systems."},
+    {"title":"Systems Thinker","subtitle":"Infrastructure that Scales","copy":"Design for long-term maintainability and velocity."},
+    {"title":"Performance Optimizer","subtitle":"Results Drive Everything","copy":"Data-led iteration across the funnel."},
+    {"title":"Collaborative Leader","subtitle":"Empowering Teams","copy":"Clarity, docs, and enablement first."}
+  ],
+  "stackTiles": [
+    {"title":"Security Architecture & Hardening","summary":"Defense-in-depth with WAF, rulesets, rate limiting.","slug":"the-fortress"},
+    {"title":"Performance & Caching Architecture","summary":"Multi-layer caching for sub-second loads.","slug":"the-engine-room"},
+    {"title":"Conversion & Ad Tracking","summary":"Click-to-sale attribution with server events.","slug":"the-compass"},
+    {"title":"Automation & CRM","summary":"Lifecycle flows, tagging, scoring, segmentation.","slug":"the-launchpad"},
+    {"title":"Custom Dashboards & Tooling","summary":"Ops dashboards that close the loop.","slug":"the-conductor"},
+    {"title":"Database Optimization","summary":"Lean queries, indexes, lower TTFB.","slug":"the-engine-room"},
+    {"title":"Server & DevOps","summary":"Observability and proactive monitoring.","slug":"the-engine-room"},
+    {"title":"WordPress Core","summary":"High-performance WP with modern patterns.","slug":"the-engine-room"},
+    {"title":"AI Assistant","summary":"OpenAI-powered support assistant.","slug":"the-guardian"}
+  ],
+  "timeline": [
     {
-      "title": "Build for the System",
-      "description": "Strategy and architecture are inseparable. I design marketing programs that are not only creative but also technically sound, scalable, and deeply integrated with the entire business ecosystem."
+      "role":"Marketing Director & Systems Architect",
+      "org":"Graston Technique®",
+      "period":"Aug 2023 — Present",
+      "bullets":[
+        "Built 400+ automations; unified LMS, Woo, CRM, analytics.",
+        "Deployed GPT-powered ‘Guardian’ support assistant.",
+        "E-commerce conversion lift with UX + checkout improvements."
+      ]
     },
     {
-      "title": "Translate Complexity",
-      "description": "My role is to bridge the gap between marketing, product, and engineering. I translate complex technical concepts into clear business value and marketing goals into actionable technical requirements."
+      "role":"Interim Director of Marketing",
+      "org":"Timelane Technologies Group",
+      "period":"Mar 2023 — Jul 2023",
+      "bullets":[
+        "Stabilized ops; improved GTM + CRM; faster campaign cadence."
+      ]
     },
     {
-      "title": "Measure What Matters",
-      "description": "Data is only useful if it drives decisions. I focus on building clean, reliable analytics pipelines that deliver actionable insights, not just vanity metrics, to measure impact and guide strategy."
+      "role":"Marketing Manager → Administrator",
+      "org":"Riley Bennett Egloff, LLP",
+      "period":"2015 — 2023",
+      "bullets":[
+        "Rebrand + technical SEO → ~35% increase in qualified inquiries."
+      ]
     },
     {
-      "title": "Automate for Impact",
-      "description": "I identify and automate repetitive, low-value tasks to free up teams for high-impact strategic work. This reduces operational drag, minimizes errors, and allows us to scale our efforts effectively."
+      "role":"Marketing Coordinator",
+      "org":"Pike Medical Consultants",
+      "period":"2009 — 2013",
+      "bullets":[
+        "~45% growth in patient visits; online check-in integration."
+      ]
     }
   ],
-  "stack": {
-    "title": "My Technology Stack",
-    "categories": [
-      { "name": "CRM/Automation", "items": ["FluentCRM", "WP Fusion", "Uncanny Automator"] },
-      { "name": "Analytics/Tracking", "items": ["GA4/GTM (Server)", "Looker Studio", "BigQuery"] },
-      { "name": "Infrastructure", "items": ["Cloudflare", "Netdata", "Nginx/PHP-FPM"] },
-      { "name": "Dev & Build", "items": ["React/Vite", "TypeScript", "TailwindCSS"] },
-      { "name": "CMS & E-commerce", "items": ["WordPress", "WooCommerce", "LearnDash"] },
-      { "name": "APIs & Integration", "items": ["Webhooks", "REST APIs", "Zapier"] }
-    ]
-  },
   "partnerships": [
     {
-      "name": "Graston Technique®",
-      "role": "Marketing Director & Systems Architect",
-      "description": "Led a full-stack digital transformation, implementing new automation, analytics, and security architectures."
+      "client":"Pike Medical Consultants / UrgentCare Indy",
+      "type":"B2C Healthcare",
+      "results":[
+        "Real-time online check-in (Clockwise MD)",
+        "45% avg patient-visit growth over three years",
+        "Local SEO + targeted Ads campaigns"
+      ]
     },
     {
-      "name": "Timelane Technologies",
-      "role": "Interim Director of Marketing",
-      "description": "Stabilized marketing operations and rebuilt GTM tracking and CRM workflows for a SaaS startup."
+      "client":"Russell Painting Company",
+      "type":"B2C Home Services",
+      "results":[
+        "Trust-focused redesign (4.9/5 HomeAdvisor)",
+        "Angie’s List ‘A’ grade prominence",
+        "Story-driven content → increased leads"
+      ]
     },
     {
-      "name": "Riley Bennett Egloff, LLP",
-      "role": "Marketing Manager",
-      "description": "Directed a full firm rebrand and technical SEO overhaul, resulting in a ~35% increase in qualified inquiries."
+      "client":"Tuohy Bailey & Moore LLP",
+      "type":"B2B Legal",
+      "results":[
+        "Corporate market rebrand + brand playbook",
+        "Website redesign w/ improved UX",
+        "Positioned for high-value client acquisition"
+      ]
     }
   ],
   "testimonials": [
     {
-      "quote": "Jacob is the rare marketer who is as comfortable in a strategy meeting as he is in a code editor. He transformed our data pipeline, giving us clarity we never had before. His work was a game-changer for our entire marketing function.",
-      "name": "Sarah Chen",
-      "title": "CEO, Tech Innovators Inc."
+      "quote":"Jacob transformed our marketing operations... attribution visibility up 300%.",
+      "author":"Sarah Chen",
+      "title":"VP of Marketing",
+      "company":"TechFlow Solutions"
     }
-  ],
-  "cta": {
-    "title": "Ready to build something great?",
-    "links": [
-      { "label": "See My Work", "href": "/case-studies" },
-      { "label": "Download CV", "href": "/resume" },
-      { "label": "Get In Touch", "href": "mailto:hoosierdarling@gmail.com" }
-    ]
-  }
+  ]
 }
