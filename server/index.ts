@@ -53,7 +53,7 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  const port = parseInt(process.env.PORT || '5173', 10);
+  const port = parseInt(process.env.PORT || '1337', 10);
   server.listen(port, () => {
     log(`serving on port ${port}`);
   });

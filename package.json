@@ -4,7 +4,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env PORT=5174 NODE_ENV=development tsx server/index.ts",
+    "dev": "cross-env PORT=1337 NODE_ENV=development tsx server/index.ts",
     "build": "vite build",
     "build:full": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "start": "NODE_ENV=production node dist/index.js",
@@ -62,6 +62,7 @@
     "lucide-react": "^0.453.0",
     "marked": "^16.3.0",
     "memorystore": "^1.6.7",
+    "minisearch": "^7.2.0",
     "next-themes": "^0.4.6",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",

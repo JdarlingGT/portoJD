@@ -5,6 +5,7 @@ import { marked } from 'marked';
 import fm from 'front-matter';
 import { ArrowLeft } from 'lucide-react';
 import Breadcrumbs from '../components/ui/Breadcrumbs';
+import AnchorTOC from '../components/ui/AnchorTOC';
 import { fadeIn } from '../styles/animations';
 
 interface FrontMatter {
@@ -13,17 +14,10 @@ interface FrontMatter {
   tags: string[];
 }
 
-interface Heading {
-  id: string;
-  level: number;
-  text: string;
-}
-
 const DeepDive = () => {
   const { slug } = useParams<{ slug: string }>();
   const [frontMatter, setFrontMatter] = useState<FrontMatter | null>(null);
   const [html, setHtml] = useState<string>('');
-  const [headings, setHeadings] = useState<Heading[]>([]);
 
   useEffect(() => {
     if (!slug) return;
@@ -36,23 +30,20 @@ const DeepDive = () => {
         const content: any = fm(markdown);
         setFrontMatter(content.attributes);
 
-        const parsedHtml = await marked.parse(content.body);
-        setHtml(parsedHtml as string);
+        const rawHtml = await marked.parse(content.body);
 
-        // Generate TOC
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = parsedHtml;
-        const headingElements = tempDiv.querySelectorAll('h2, h3');
-        const tocHeadings: Heading[] = Array.from(headingElements).map((el, i) => {
-          const text = el.textContent || '';
-          const level = parseInt(el.tagName.substring(1), 10);
-          const id = text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '') + `-${i}`;
-          el.id = id;
-          return { id, level, text };
+        const slugify = (text: string) => text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(rawHtml, 'text/html');
+        const headings = doc.querySelectorAll('h2, h3');
+        
+        headings.forEach((heading, i) => {
+          const text = heading.textContent || '';
+          heading.id = `${slugify(text)}-${i}`;
         });
-        setHeadings(tocHeadings);
-        // We need to re-set the html with the new IDs
-        setHtml(tempDiv.innerHTML);
+
+        setHtml(doc.body.innerHTML);
 
       } catch (error) {
         console.error('Failed to fetch or parse markdown:', error);
@@ -89,18 +80,7 @@ const DeepDive = () => {
             className="prose prose-invert max-w-3xl mx-auto lg:mx-0 lg:flex-grow"
             dangerouslySetInnerHTML={{ __html: html }}
           />
-          {headings.length > 0 && (
-            <aside className="hidden lg:block w-64 ml-12 sticky top-24 self-start">
-              <h3 className="text-sm font-bold tracking-widest uppercase mb-4">On this page</h3>
-              <ul className="space-y-2">
-                {headings.map(h => (
-                  <li key={h.id} style={{ paddingLeft: `${(h.level - 2) * 1}rem` }}>
-                    <a href={`#${h.id}`} className="text-sm text-slate-400 hover:text-slate-100 transition-colors">{h.text}</a>
-                  </li>
-                ))}
-              </ul>
-            </aside>
-          )}
+          <AnchorTOC />
         </div>
       </motion.div>
     </div>

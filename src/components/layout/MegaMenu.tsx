@@ -26,6 +26,13 @@ const menuData = {
       ]
     },
     {
+      label: "Resume / CV",
+      links: [
+        { label: "View Résumé", href: "/resume" },
+        { label: "Download CV", href: "/resume" },
+      ]
+    },
+    {
       label: "More",
       links: [
         { label: "Side Projects", href: "/projects" },
@@ -64,7 +71,7 @@ const MegaMenu = () => {
             exit="exit"
             className="absolute top-full mt-4 -ml-4 w-max bg-black/50 backdrop-blur-xl border border-white/10 rounded-xl shadow-lg"
           >
-            <div className="grid grid-cols-5 gap-x-8 p-8">
+            <div className="grid grid-cols-4 gap-x-8 p-8">
               {menuData.columns.map((column, colIndex) => (
                 <div key={colIndex} className="space-y-3">
                   <h3 className="text-sm font-bold text-white tracking-widest uppercase">{column.label}</h3>
