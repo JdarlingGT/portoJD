@@ -17,6 +17,8 @@ import Toolbox from "@/pages/toolbox";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import ContactSuccess from "@/pages/contact-success";
+import Preloader from "@/components/ui/Preloader";
+import { CursorTrail } from "@/components/ui/CursorTrail";
 
 function Router() {
   return (
@@ -40,6 +42,8 @@ function App() {
         <NavProvider>
           <TooltipProvider>
             <Toaster />
+            <CursorTrail />
+            <Preloader />
             <Header />
             <MegaMenu />
             <MobileMenu />

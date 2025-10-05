@@ -1,0 +1,8 @@
+{
+  "name": "Jacob Darling Portfolio",
+  "short_name": "JD Portfolio",
+  "display": "standalone",
+  "background_color": "#0F0F0F",
+  "theme_color": "#00FFFF",
+  "icons": [{ "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "512x512" }]
+}

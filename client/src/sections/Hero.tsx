@@ -4,16 +4,14 @@ import { Button } from "../components/ui/button";
 export default function Hero() {
   return (
     <section className="relative w-full h-screen flex flex-col justify-center items-center text-center bg-[#0F0F0F] overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <iframe
-          className="absolute top-1/2 left-1/2 w-full h-full -translate-x-1/2 -translate-y-1/2"
-          style={{ width: '177.77vh', minWidth: '100%', height: '100vh', minHeight: '56.25vw' }}
-          src="https://www.youtube.com/embed/K6kco8-OZO0?autoplay=1&loop=1&mute=1&controls=0&playlist=K6kco8-OZO0&playsinline=1&showinfo=0&rel=0"
-          title="Hero Background Video"
-          frameBorder="0"
-          allow="autoplay; encrypted-media"
-        ></iframe>
-      </div>
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-30"
+        src="/assets/HBB/Screen recording (2).webm"
+      />
       <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0F] via-transparent to-transparent"></div>
 
       <motion.img
@@ -46,6 +44,13 @@ export default function Hero() {
             <Button variant="secondary">Download Résumé</Button>
           </a>
         </div>
+      </motion.div>
+      <motion.div 
+        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity, repeatType: 'loop' }}
+      >
+        <svg className="w-6 h-6 text-gray-400" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
       </motion.div>
     </section>
   );

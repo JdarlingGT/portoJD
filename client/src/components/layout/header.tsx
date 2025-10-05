@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
 import { NavContext } from "./NavContext";
 import { Menu } from "lucide-react";
@@ -9,6 +9,7 @@ export function Header() {
   if (!navContext) throw new Error("Header must be used within a NavProvider");
   const { toggleMenu } = navContext;
   const [scrolled, setScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -17,7 +18,12 @@ export function Header() {
   }, []);
 
   return (
-    <motion.header
+    <>
+      <motion.div
+        style={{ scaleX: scrollYProgress }}
+        className="fixed top-0 left-0 right-0 h-[3px] origin-left bg-accentCyan z-[60]"
+      />
+      <motion.header
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -55,5 +61,6 @@ export function Header() {
         </button>
       </div>
     </motion.header>
+    </>
   );
 }

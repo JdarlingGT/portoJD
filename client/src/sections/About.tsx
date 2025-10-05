@@ -10,9 +10,7 @@ const shortVideos = [
 export default function About() {
   const images = [
     "/assets/personal logo and bio pics/bio pic 1.jpg",
-    "/assets/personal logo and bio pics/DSC_7429.jpg",
-    "/assets/personal logo and bio pics/INterview-22.jpg",
-    "/assets/personal logo and bio pics/QVZmZmZhVGNUMmFlTGxRTQ.jpeg"
+    "/assets/personal logo and bio pics/DSC_7429.jpg"
   ];
 
   const [index, setIndex] = useState(0);
