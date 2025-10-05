@@ -1,0 +1,122 @@
+[
+  {
+    "id": "aiChatbotCrm",
+    "title": "AI Chatbot + CRM Lookups",
+    "tagline": "CRM-aware support that answers real questions, not just FAQs.",
+    "why": "Support was drowning in repeat questions (orders, CEUs, prerequisites).",
+    "build": "Cloudflare Workers + Woo/LearnDash/FluentCRM lookups, intent detection, safe fallback.",
+    "impact": ["Self-service up", "Handoff speed ↑", "Ticket volume ↓"],
+    "kpis": ["-30–50% repeat tickets", "+FCR", "Happier NPS"],
+    "tags": ["Automation", "CRM", "AI"],
+    "coverImg": "/assets/images/events-hub-instructor-tools-hero.png",
+    "slug": "ai-chatbot-crm"
+  },
+  {
+    "id": "eventsHub",
+    "title": "Events Hub + Instructor Tools",
+    "tagline": "One dashboard for enrollment velocity and prep.",
+    "why": "Fragmented ops made forecasting and comms slow.",
+    "build": "Velocity charts, SKU mix, cohort prep tools, campaign alignment.",
+    "impact": ["Faster resourcing", "Smarter pushes"],
+    "kpis": ["Time-to-action ↓", "Comms accuracy ↑"],
+    "tags": ["Analytics", "Ops"],
+    "coverImg": "/assets/images/events-hub-instructor-tools-thumb-800x450.jpg",
+    "slug": "events-hub"
+  },
+  {
+    "id": "quoteToOrder",
+    "title": "Quote-to-Order + Payment Plans",
+    "tagline": "Close phone quotes via secure pay-by-link.",
+    "why": "High-value quotes stalled; manual payment friction.",
+    "build": "GF → pending Woo order → secure pay link; Stripe plans (3–18 mo).",
+    "impact": ["Close rate ↑", "Ops overhead ↓"],
+    "kpis": ["+Close %", "+AOV"],
+    "tags": ["E-commerce", "Automation"],
+    "coverImg": "/assets/images/payment-plans-quote-to-order-1-hero.png",
+    "slug": "quote-to-order"
+  },
+  {
+    "id": "providerRoi",
+    "title": "Provider Directory ROI",
+    "tagline": "Members see proof—not promises.",
+    "why": "Renewals wanted transparent performance.",
+    "build": "GA4 API sync: profile views, clicks, sources, weekly trends vs peers.",
+    "impact": ["Renewals ↑", "Upgrades ↑"],
+    "kpis": ["+Engagement", "+Retention"],
+    "tags": ["Analytics", "CRM"],
+    "coverImg": "/assets/images/evidence-plus-infographic-hero.png",
+    "slug": "provider-roi"
+  },
+  {
+    "id": "gtmGa4Revamp",
+    "title": "GTM + GA4 Revamp (The Compass)",
+    "tagline": "A foundation of truth for decisions and bidding.",
+    "why": "Noisy events, weak attribution, wasted spend.",
+    "build": "Normalized schema (formSubmit, purchaseCompleted), server hooks, Ads on quality.",
+    "impact": ["ROAS ↑", "Confidence ↑"],
+    "kpis": ["False conversions ↓", "Qualified signals ↑"],
+    "tags": ["Analytics", "Ads", "Data"],
+    "coverImg": "/assets/images/edge-image-optimization-pipeline-thumb-800x450.jpg",
+    "slug": "gtm-ga4-revamp"
+  },
+  {
+    "id": "trainingLifecycle",
+    "title": "Training Lifecycle Automation",
+    "tagline": "From purchase to certification—fully automated.",
+    "why": "Manual handoffs delayed certs and support.",
+    "build": "Woo → LearnDash group → eval → WP Fusion → certificate.",
+    "impact": ["Cert delays ↓", "CSAT ↑"],
+    "kpis": ["Touchpoints automated", "Time-to-cert ↓"],
+    "tags": ["Automation", "LMS", "CRM"],
+    "coverImg": "/assets/images/events-hub-instructor-tools-thumb-800x450.jpg",
+    "slug": "training-lifecycle"
+  },
+  {
+    "id": "edgeSecurity",
+    "title": "Edge Security (The Fortress)",
+    "tagline": "Threats stopped at the edge; origin stays cool.",
+    "why": "Bot floods and junk traffic spiked infra costs.",
+    "build": "Cloudflare WAF, Bot Fight, rate limits, DNSSEC, AOP/mTLS, strict headers.",
+    "impact": ["~85k bad hits blocked/mo", "Fewer incidents"],
+    "kpis": ["Attack traffic ↓", "Stability ↑"],
+    "tags": ["Security", "Infra"],
+    "coverImg": "/assets/images/payment-plans-quote-to-order-2-hero.png",
+    "slug": "edge-security"
+  },
+  {
+    "id": "edgeCdn",
+    "title": "Edge & CDN Performance",
+    "tagline": "70% faster repeat visits. Lower origin strain.",
+    "why": "CWV and SEO held back by payload & cache misses.",
+    "build": "Tiered cache (≈86% hit), cookie-free assets, Brotli, critical CSS, lazy media.",
+    "impact": ["CWV ↑", "SEO ↑"],
+    "kpis": ["Repeat load ↓", "Cache hit ↑"],
+    "tags": ["Performance", "Infra"],
+    "coverImg": "/assets/images/edge-image-optimization-pipeline-hero.png",
+    "slug": "edge-cdn"
+  },
+  {
+    "id": "advConversions",
+    "title": "Advanced Conversion Tracking",
+    "tagline": "Ads train on qualified leads—not noise.",
+    "why": "Mixed event quality confused bidding.",
+    "build": "GTM RegEx by form IDs, OM events → dataLayer, Ads conversion actions by quality.",
+    "impact": ["Wasted spend ↓", "Pipeline quality ↑"],
+    "kpis": ["CPA ↓", "Qualified leads ↑"],
+    "tags": ["Analytics", "Ads"],
+    "coverImg": "/assets/images/payment-plans-quote-to-order-2-thumb-800x450.jpg",
+    "slug": "advanced-conversions"
+  },
+  {
+    "id": "monitoringOps",
+    "title": "Monitoring + Server Optimization",
+    "tagline": "Real-time visibility and stability when it matters.",
+    "why": "Random timeouts during campaigns.",
+    "build": "Netdata alerts; PHP-FPM tuning; Apache line limits; PHP 8.3; DB autoload cleanup.",
+    "impact": ["Stability ↑", "Admin snappier"],
+    "kpis": ["500s ↓", "TTFB ↓"],
+    "tags": ["Infra", "Performance"],
+    "coverImg": "/assets/images/events-hub-instructor-tools-hero.png",
+    "slug": "monitoring-ops"
+  }
+]
