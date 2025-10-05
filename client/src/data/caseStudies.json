@@ -1,23 +1,24 @@
 [
   {
     "id": 1,
-    "title": "Project Alpha: E-commerce Conversion Boost",
-    "subtitle": "Increased checkout completion by 25% for a major online retailer.",
-    "image": "/assets/case-study-1.jpg",
-    "roi": 150
+    "title": "HBB E-commerce Platform",
+    "subtitle": "Full-stack development for a high-volume beauty brand.",
+    "image": "/assets/HBB/hbb-preview.jpg",
+    "video": "/assets/HBB/hbb-animation.webm",
+    "roi": 250
   },
   {
     "id": 2,
-    "title": "Project Beta: SaaS Platform Launch",
-    "subtitle": "Achieved 10,000 active users within the first three months.",
-    "image": "/assets/case-study-2.jpg",
-    "roi": 320
+    "title": "Russell Painting Co. Branding",
+    "subtitle": "Brand identity and web presence for a luxury painting contractor.",
+    "image": "/assets/Russell painting/russell-preview.jpg",
+    "roi": 180
   },
   {
     "id": 3,
-    "title": "Project Gamma: Brand Identity Overhaul",
-    "subtitle": "Redefined a legacy brand's digital presence, leading to a 40% increase in engagement.",
-    "image": "/assets/case-study-3.jpg",
-    "roi": 210
+    "title": "Tuohy Bailey & Moore LLP",
+    "subtitle": "Modernizing the digital front-door for a legacy law firm.",
+    "image": "/assets/Tuohy Bailey & Moore LLP/tbm-preview.jpg",
+    "roi": 120
   }
 ]

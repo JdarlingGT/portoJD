@@ -16,12 +16,25 @@ export default function CaseStudies() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
             >
-              <div className="h-48 overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-500"
-                />
+              <div className="h-48 overflow-hidden bg-black/20">
+                {item.video ? (
+                  <video 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline 
+                    poster={item.image} 
+                    src={item.video}
+                    className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                )}
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold">{item.title}</h3>

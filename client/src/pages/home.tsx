@@ -1,8 +1,8 @@
 import Hero from "@/sections/Hero";
+import About from "@/sections/About";
 import CaseStudies from "@/sections/CaseStudies";
-import { PhilosophySection } from "@/components/sections/philosophy";
-import { SkillsOverviewSection } from "@/components/sections/skills-overview";
-import { AboutSection } from "@/components/sections/about-section";
+import Reel from "@/sections/Reel";
+import WhyICreate from "@/sections/WhyICreate";
 import { ContactSection } from "@/components/sections/contact-section";
 import { Button } from "@/components/ui/button";
 import { analytics } from "@/lib/analytics";
@@ -25,10 +25,10 @@ export default function Home() {
 
       <main id="main-content" className="page-enter">
         <Hero />
+        <About />
         <CaseStudies />
-        <PhilosophySection />
-        <SkillsOverviewSection />
-        <AboutSection />
+        <Reel />
+        <WhyICreate />
         <ContactSection />
       </main>
 

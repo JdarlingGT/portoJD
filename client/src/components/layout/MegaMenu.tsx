@@ -51,18 +51,35 @@ export const MegaMenu: React.FC = () => {
           animate="visible"
           exit="exit"
           className="fixed inset-0 top-[60px] md:top-[80px] z-30 bg-black/50 backdrop-blur-xl"
-          onClick={(e) => { if (e.target === menuRef.current) toggleMenu(); }}
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => { if (e.target === menuRef.current) toggleMenu(); }}
         >
           <div className="container mx-auto h-full px-4 sm:px-6 lg:px-8">
             <div className="grid h-full grid-cols-1 gap-8 py-12 md:grid-cols-3">
               {/* Left Panel: Identity */}
               <motion.div variants={itemVariants} className="flex flex-col justify-between">
-                <div>
-                  <h3 className="text-lg font-semibold text-accentLime mb-4">Jacob Darling</h3>
-                  <p className="text-muted-foreground">{greeting}</p>
+                <div className="flex items-center gap-4">
+                  <img 
+                    src="/assets/personal logo and bio pics/bio pic 1.jpg" 
+                    alt="Jacob Darling" 
+                    className="h-12 w-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <h3 className="text-lg font-semibold text-accentLime">Jacob Darling</h3>
+                    <p className="text-muted-foreground text-sm">{greeting}</p>
+                  </div>
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  <p>Marketing Architect & Web Developer</p>
+
+                <div className="group relative flex items-center gap-4 mt-8">
+                  <motion.img 
+                    src="/assets/personal logo and bio pics/jd logo .png" 
+                    alt="JD Logo"
+                    className="h-16 w-16 transition-all duration-300"
+                    whileHover={{ rotate: 8, filter: 'drop-shadow(0 0 8px #C0FF33)' }}
+                  />
+                  <div className="absolute left-24 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <p className="font-semibold">Marketing Architect</p>
+                    <p className="text-muted-foreground text-sm">+ Systems Builder</p>
+                  </div>
                 </div>
               </motion.div>
 
@@ -85,7 +102,7 @@ export const MegaMenu: React.FC = () => {
                     {userType === 'recruiter' && (
                       <Button variant="outline" className="border-accentCoral text-accentCoral hover:bg-accentCoral hover:text-base">Download Résumé</Button>
                     )}
-                    <Button variant="primary">Book a Call</Button>
+                    <Button>Book a Call</Button>
                   </div>
                 </div>
                 <div className="flex items-center justify-center space-x-6">
